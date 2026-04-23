@@ -137,7 +137,8 @@ export default function GoogleReviews() {
     <section
       id="testimonials"
       ref={root}
-      className="relative py-20 md:py-28 bg-[color:var(--color-espresso)] overflow-hidden"
+      className="relative py-20 md:py-28 overflow-hidden"
+      style={{ background: "transparent" }}
     >
       {/* Header */}
       <div className="testimonials-header text-center mb-14 px-6">
@@ -168,8 +169,8 @@ export default function GoogleReviews() {
       </div>
 
       {/* Fade edges */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-20 md:w-40 bg-gradient-to-r from-[color:var(--color-espresso)] to-transparent z-10" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-20 md:w-40 bg-gradient-to-l from-[color:var(--color-espresso)] to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-20 md:w-40 z-10" style={{ background: "linear-gradient(to right, rgba(26,15,11,0.9), transparent)" }} />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-20 md:w-40 z-10" style={{ background: "linear-gradient(to left, rgba(26,15,11,0.9), transparent)" }} />
 
       {/* CTA */}
       <div className="text-center mt-14 px-6 relative z-20">

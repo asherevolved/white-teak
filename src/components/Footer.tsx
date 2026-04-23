@@ -4,7 +4,8 @@ export default function Footer() {
   return (
     <footer
       id="footer"
-      className="border-t border-[color:var(--color-line)]/70 bg-[color:var(--color-wt-warm-white)]"
+      className="border-t border-white/[0.06]"
+      style={{ background: "transparent" }}
     >
       <div className="mx-auto max-w-[1400px] px-6 pt-10 pb-5 lg:px-12 lg:pt-12 lg:pb-6">
         <div className="mb-10 flex items-start justify-end gap-4">
@@ -12,7 +13,7 @@ export default function Footer() {
             href={SOCIAL_LINKS.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[color:var(--color-espresso)] transition-opacity hover:opacity-65"
+            className="text-[color:var(--color-ivory)] transition-opacity hover:opacity-65"
             aria-label="Instagram"
           >
             <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7" stroke="currentColor" strokeWidth="1.8">
@@ -25,7 +26,7 @@ export default function Footer() {
             href={SOCIAL_LINKS.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[color:var(--color-espresso)] transition-opacity hover:opacity-65"
+            className="text-[color:var(--color-ivory)] transition-opacity hover:opacity-65"
             aria-label="Facebook"
           >
             <svg viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7">
@@ -36,27 +37,27 @@ export default function Footer() {
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-20">
           <div>
-            <div className="mb-4 text-[color:var(--color-espresso)]">
+            <div className="mb-4 text-[color:var(--color-ivory)]">
               <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7" stroke="currentColor" strokeWidth="1.7">
                 <path d="M4 5.5h16v11H8l-4 4v-15Z" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <h4 className="mb-2 font-sans text-[clamp(1.6rem,2.5vw,2rem)] leading-tight text-[color:var(--color-espresso)]">
+            <h4 className="mb-2 font-sans text-[clamp(1.6rem,2.5vw,2rem)] leading-tight text-[color:var(--color-ivory)]">
               Find your way here
             </h4>
-            <p className="font-sans text-[15px] leading-[1.6] text-[color:var(--color-espresso)]">
+            <p className="font-sans text-[15px] leading-[1.6] text-[color:var(--color-ivory)]">
               Everyday:
             </p>
-            <p className="mb-1 font-sans text-[15px] leading-[1.6] text-[color:var(--color-espresso)]">
+            <p className="mb-1 font-sans text-[15px] leading-[1.6] text-[color:var(--color-ivory)]">
               8:30 am to 11 pm
             </p>
-            <p className="max-w-[340px] font-sans text-[15px] leading-[1.6] text-[color:var(--color-espresso)]">
+            <p className="max-w-[340px] font-sans text-[15px] leading-[1.6] text-[color:var(--color-ivory)]">
               {CONTACT.address}
             </p>
           </div>
 
           <div>
-            <div className="mb-4 text-[color:var(--color-espresso)]">
+            <div className="mb-4 text-[color:var(--color-ivory)]">
               <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7" stroke="currentColor" strokeWidth="1.7">
                 <rect x="4" y="5" width="16" height="14" rx="3" />
                 <path d="M8 9h8" strokeLinecap="round" />
@@ -64,36 +65,36 @@ export default function Footer() {
                 <path d="M14.5 5v2" strokeLinecap="round" />
               </svg>
             </div>
-            <h4 className="mb-2 font-sans text-[clamp(1.6rem,2.5vw,2rem)] leading-tight text-[color:var(--color-espresso)]">
+            <h4 className="mb-2 font-sans text-[clamp(1.6rem,2.5vw,2rem)] leading-tight text-[color:var(--color-ivory)]">
               Contact Us
             </h4>
-            <p className="font-sans text-[15px] leading-[1.6] text-[color:var(--color-espresso)]">
+            <p className="font-sans text-[15px] leading-[1.6] text-[color:var(--color-ivory)]">
               Whatsapp:
             </p>
             <a
               href={CONTACT.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="block font-sans text-[15px] leading-[1.6] text-[color:var(--color-espresso)] transition-opacity hover:opacity-65"
+              className="block font-sans text-[15px] leading-[1.6] text-[color:var(--color-ivory)] transition-opacity hover:opacity-65"
             >
               {CONTACT.whatsapp}
             </a>
             <a
               href={`mailto:${CONTACT.email}`}
-              className="block font-sans text-[15px] leading-[1.6] text-[color:var(--color-espresso)] transition-opacity hover:opacity-65"
+              className="block font-sans text-[15px] leading-[1.6] text-[color:var(--color-ivory)] transition-opacity hover:opacity-65"
             >
               {CONTACT.email}
             </a>
           </div>
 
           <div>
-            <div className="mb-4 text-[color:var(--color-espresso)]">
+            <div className="mb-4 text-[color:var(--color-ivory)]">
               <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7" stroke="currentColor" strokeWidth="1.7">
                 <path d="M12 20s6-5.5 6-10a6 6 0 1 0-12 0c0 4.5 6 10 6 10Z" />
                 <circle cx="12" cy="10" r="2.3" />
               </svg>
             </div>
-            <h4 className="mb-2 font-sans text-[clamp(1.6rem,2.5vw,2rem)] leading-tight text-[color:var(--color-espresso)]">
+            <h4 className="mb-2 font-sans text-[clamp(1.6rem,2.5vw,2rem)] leading-tight text-[color:var(--color-ivory)]">
               Order Now
             </h4>
             <ul className="space-y-1">
@@ -102,7 +103,7 @@ export default function Footer() {
                   href={ORDER_LINKS.direct}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-[15px] leading-[1.6] text-[color:var(--color-espresso)] transition-opacity hover:opacity-65"
+                  className="font-sans text-[15px] leading-[1.6] text-[color:var(--color-ivory)] transition-opacity hover:opacity-65"
                 >
                   Direct
                 </a>
@@ -112,7 +113,7 @@ export default function Footer() {
                   href={ORDER_LINKS.zomato}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-[15px] leading-[1.6] text-[color:var(--color-espresso)] transition-opacity hover:opacity-65"
+                  className="font-sans text-[15px] leading-[1.6] text-[color:var(--color-ivory)] transition-opacity hover:opacity-65"
                 >
                   Zomato
                 </a>
@@ -122,7 +123,7 @@ export default function Footer() {
                   href={ORDER_LINKS.swiggy}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-[15px] leading-[1.6] text-[color:var(--color-espresso)] transition-opacity hover:opacity-65"
+                  className="font-sans text-[15px] leading-[1.6] text-[color:var(--color-ivory)] transition-opacity hover:opacity-65"
                 >
                   Swiggy
                 </a>
@@ -132,11 +133,11 @@ export default function Footer() {
         </div>
 
         <div className="pt-20 text-center lg:pt-24">
-          <p className="font-display text-[clamp(3rem,8vw,5.8rem)] leading-none tracking-[-0.04em] text-[color:var(--color-espresso)]">
+          <p className="font-display text-[clamp(3rem,8vw,5.8rem)] leading-none tracking-[-0.04em] text-[color:var(--color-ivory)]">
             WHITE TEAK COFFEE ROASTERS
             <span className="align-top text-[0.62em]">®</span>
           </p>
-          <p className="mt-3 font-sans text-[12px] leading-relaxed text-[color:var(--color-walnut)]/72">
+          <p className="mt-3 font-sans text-[12px] leading-relaxed text-[color:var(--color-ivory)]/40">
             ©Copyright 2024. White Teak Coffee Roasters. All Rights Reserved.
           </p>
         </div>

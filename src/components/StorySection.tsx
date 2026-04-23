@@ -98,89 +98,67 @@ export default function StorySection() {
           "-=0.35"
         );
 
-      /* ── master scrub timeline for the whole vertical line + items ── */
-      const timelineTrack = root.current?.querySelector(
-        ".timeline-track"
-      ) as HTMLElement;
+      /* ── vertical line fill (scrub, only grows forward) ── */
       const timelineFill = root.current?.querySelector(
         ".timeline-fill"
       ) as HTMLElement;
-      const items = gsap.utils.toArray<HTMLElement>(".timeline-item");
+      const timelineTrack = root.current?.querySelector(
+        ".timeline-track"
+      ) as HTMLElement;
 
-      if (!timelineTrack || !timelineFill || !items.length) return;
-
-      // main scrub timeline — the line grows and items reveal progressively
-      const masterTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: timelineTrack,
-          start: "top 65%",
-          end: "bottom 30%",
-          scrub: 0.8,
-        },
-      });
-
-      // each item gets an equal slice of the timeline
-      const sliceDuration = 1 / items.length;
-
-      items.forEach((item, i) => {
-        const dot = item.querySelector(".timeline-dot") as HTMLElement;
-        const ring = item.querySelector(".timeline-ring") as HTMLElement;
-        const content = item.querySelector(".timeline-content") as HTMLElement;
-        const isLeft = i % 2 === 0;
-
-        const pos = i * sliceDuration;
-
-        // line fills to this item's position
-        masterTl.to(
-          timelineFill,
-          {
-            scaleY: (i + 1) / items.length,
-            duration: sliceDuration * 0.6,
-            ease: "none",
+      if (timelineTrack && timelineFill) {
+        gsap.to(timelineFill, {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: timelineTrack,
+            start: "top 70%",
+            end: "bottom 50%",
+            scrub: 0.5,
           },
-          pos
-        );
+        });
+      }
 
-        // dot pops in
-        masterTl.fromTo(
-          dot,
-          { scale: 0, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: sliceDuration * 0.25,
-            ease: "back.out(2)",
-          },
-          pos + sliceDuration * 0.5
-        );
+      /* ── each item fires once when it scrolls in, never reverses ── */
+      gsap.utils
+        .toArray<HTMLElement>(".timeline-item")
+        .forEach((item, i) => {
+          const dot = item.querySelector(".timeline-dot") as HTMLElement;
+          const ring = item.querySelector(".timeline-ring") as HTMLElement;
+          const content = item.querySelector(".timeline-content") as HTMLElement;
+          const isLeft = i % 2 === 0;
 
-        // ring expands
-        masterTl.fromTo(
-          ring,
-          { scale: 0.4, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: sliceDuration * 0.3,
-            ease: "power2.out",
-          },
-          pos + sliceDuration * 0.45
-        );
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: item,
+              start: "top 82%",
+              toggleActions: "play none none none",
+            },
+          });
 
-        // content slides in from the correct side
-        masterTl.fromTo(
-          content,
-          { opacity: 0, x: isLeft ? -50 : 50, y: 20 },
-          {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            duration: sliceDuration * 0.45,
-            ease: "expo.out",
-          },
-          pos + sliceDuration * 0.5
-        );
-      });
+          // dot pops
+          tl.fromTo(
+            dot,
+            { scale: 0, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2)" }
+          );
+
+          // ring
+          tl.fromTo(
+            ring,
+            { scale: 0.4, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" },
+            "-=0.2"
+          );
+
+          // content slides in
+          tl.fromTo(
+            content,
+            { opacity: 0, x: isLeft ? -40 : 40, y: 16 },
+            { opacity: 1, x: 0, y: 0, duration: 0.6, ease: "expo.out" },
+            "-=0.25"
+          );
+        });
     },
     { scope: root }
   );
@@ -190,22 +168,19 @@ export default function StorySection() {
       id="story"
       ref={root}
       className="relative overflow-hidden py-24 lg:py-32"
-      style={{
-        background:
-          "radial-gradient(ellipse 80% 50% at 18% 10%, rgba(27,16,10,0.03) 0%, transparent 60%), radial-gradient(ellipse 70% 45% at 85% 100%, rgba(27,16,10,0.025) 0%, transparent 60%), var(--color-linen)",
-      }}
+      style={{ background: "transparent" }}
     >
       {/* top hairline */}
-      <div className="absolute left-1/2 top-0 h-20 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[color:var(--color-line)] to-transparent" />
+      <div className="absolute left-1/2 top-0 h-20 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[rgba(243,236,223,0.3)] to-transparent" />
 
       <div className="relative mx-auto max-w-[1140px] px-6 lg:px-12">
         {/* ── intro ── */}
         <div className="story-intro max-w-[1040px]">
-          <p className="story-eyebrow mb-4 font-sans text-[13px] font-semibold uppercase tracking-[0.24em] text-[color:var(--color-espresso)] md:text-[15px]">
+          <p className="story-eyebrow mb-4 font-sans text-[13px] font-semibold uppercase tracking-[0.24em] md:text-[15px]" style={{ color: "rgba(243,236,223,0.7)" }}>
             Our Story
           </p>
 
-          <div className="story-headline max-w-[1040px] space-y-2 text-[color:var(--color-espresso)]">
+          <div className="story-headline max-w-[1040px] space-y-2" style={{ color: "#F3ECDF" }}>
             <p className="font-display text-[clamp(1.35rem,2.4vw,2.1rem)] leading-[1.35] tracking-[-0.01em] max-w-[980px]">
               <span className="italic">&quot;Filtered with Love&quot;</span>:
               being the foundation for our all-day cafe born out of a mutual
@@ -213,14 +188,14 @@ export default function StorySection() {
             </p>
           </div>
 
-          <div className="story-divider mt-10 h-px w-full max-w-[980px] bg-[color:var(--color-line)]/80" />
+          <div className="story-divider mt-10 h-px w-full max-w-[980px]" style={{ background: "rgba(243,236,223,0.25)" }} />
         </div>
 
         {/* ── vertical timeline ── */}
         <div className="relative mt-20 lg:mt-28">
           {/* track (faint) + fill (brass, grows with scroll) — bolder 3px line */}
           <div className="timeline-track absolute left-6 top-0 h-full w-[3px] rounded-full md:left-1/2 md:-translate-x-1/2">
-            <div className="h-full w-full rounded-full bg-[color:var(--color-line-soft)]/50" />
+            <div className="h-full w-full rounded-full" style={{ background: "rgba(243,236,223,0.15)" }} />
             <div
               className="timeline-fill absolute inset-0 origin-top rounded-full"
               style={{
@@ -277,7 +252,7 @@ export default function StorySection() {
                       <span className="font-sans text-[11px] uppercase tracking-[0.28em] text-[color:var(--color-brass-deep)]">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <h3 className="font-display text-[clamp(1.4rem,2.2vw,1.85rem)] font-semibold leading-tight text-[color:var(--color-espresso)]">
+                      <h3 className="font-display text-[clamp(1.4rem,2.2vw,1.85rem)] font-semibold leading-tight" style={{ color: "#F3ECDF" }}>
                         {block.title}
                       </h3>
                     </div>
@@ -292,7 +267,8 @@ export default function StorySection() {
                       {block.paragraphs.map((paragraph) => (
                         <p
                           key={paragraph}
-                          className={`font-sans text-[15px] leading-[1.8] text-[color:var(--color-walnut)] ${isLeft ? "md:ml-auto" : ""} max-w-[52ch]`}
+                          className={`font-sans text-[15px] leading-[1.8] ${isLeft ? "md:ml-auto" : ""} max-w-[52ch]`}
+                          style={{ color: "rgba(243,236,223,0.78)" }}
                         >
                           {paragraph}
                         </p>

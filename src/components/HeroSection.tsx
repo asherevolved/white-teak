@@ -59,10 +59,10 @@ export default function HeroSection() {
       ref={root}
       className="relative overflow-hidden"
       style={{
-        background:
-          "radial-gradient(ellipse 80% 60% at 80% 20%, #EDE3D1 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 10% 90%, #E6D9C1 0%, transparent 60%), #F3ECDF",
+        background: "transparent",
       }}
     >
+
       {/* Decorative blobs */}
       <div
         className="blob"
@@ -71,39 +71,28 @@ export default function HeroSection() {
           right: "-5%",
           width: "420px",
           height: "420px",
-          background: "radial-gradient(circle, #B8935A 0%, transparent 70%)",
+          background: "radial-gradient(circle, #8aab28 0%, transparent 70%)",
+          opacity: 0.35,
         }}
       />
-      <div
-        className="blob"
-        style={{
-          bottom: "-15%",
-          left: "-8%",
-          width: "380px",
-          height: "380px",
-          background: "radial-gradient(circle, #5B6B3E 0%, transparent 70%)",
-          opacity: 0.25,
-        }}
-      />
-
       {/* Floating bean decorations */}
       <svg
-        className="hero-bean absolute top-[22%] left-[6%] w-10 h-10 text-[color:var(--color-brass-deep)]/30 animate-float-idle"
-        style={{ ["--r" as string]: "15deg" } as React.CSSProperties}
+        className="hero-bean absolute top-[22%] left-[6%] w-10 h-10 animate-float-idle"
+        style={{ ["--r" as string]: "15deg", color: "rgba(134,191,90,0.35)" } as React.CSSProperties}
         viewBox="0 0 40 40" fill="currentColor"
         aria-hidden="true"
       >
         <ellipse cx="20" cy="20" rx="10" ry="16" />
-        <path d="M20 5 C 20 12, 20 28, 20 35" stroke="#F3ECDF" strokeWidth="1.5" fill="none" />
+        <path d="M20 5 C 20 12, 20 28, 20 35" stroke="#0F1F10" strokeWidth="1.5" fill="none" />
       </svg>
       <svg
-        className="hero-bean absolute bottom-[18%] right-[48%] w-8 h-8 text-[color:var(--color-walnut)]/25 animate-float-idle"
-        style={{ ["--r" as string]: "-25deg", animationDelay: "2s" } as React.CSSProperties}
+        className="hero-bean absolute bottom-[18%] right-[48%] w-8 h-8 animate-float-idle"
+        style={{ ["--r" as string]: "-25deg", animationDelay: "2s", color: "rgba(134,191,90,0.25)" } as React.CSSProperties}
         viewBox="0 0 40 40" fill="currentColor"
         aria-hidden="true"
       >
         <ellipse cx="20" cy="20" rx="10" ry="16" />
-        <path d="M20 5 C 20 12, 20 28, 20 35" stroke="#F3ECDF" strokeWidth="1.5" fill="none" />
+        <path d="M20 5 C 20 12, 20 28, 20 35" stroke="#0F1F10" strokeWidth="1.5" fill="none" />
       </svg>
 
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 pt-16 lg:pt-20 pb-24 lg:pb-28">
@@ -112,14 +101,14 @@ export default function HeroSection() {
           <div>
 
 
-            <h1 className="display-hero text-[color:var(--color-espresso)]">
+            <h1 className="display-hero" style={{ color: "#F3ECDF" }}>
               <span className="hero-title-line block overflow-hidden">
                 <span className="block">Where coffee</span>
               </span>
               <span className="hero-title-line block overflow-hidden">
                 <span className="block">
                   and cuisine{" "}
-                  <span className="font-script italic text-[color:var(--color-brass-deep)] font-normal">
+                  <span className="font-script italic font-normal" style={{ color: "#c8d96a" }}>
                     harmonize
                   </span>
                 </span>
@@ -129,7 +118,7 @@ export default function HeroSection() {
               </span>
             </h1>
 
-            <p className="hero-sub mt-8 font-sans text-[15px] md:text-base text-[color:var(--color-walnut)]/85 leading-[1.7] max-w-lg">
+            <p className="hero-sub mt-8 font-sans text-[15px] md:text-base leading-[1.7] max-w-lg" style={{ color: "rgba(200,230,190,0.8)" }}>
               A haven in the heart of Gokulam where the art of specialty coffee
               meets the craft of soulful food — weaving a tapestry of unhurried,
               all-day cafe moments.
@@ -140,7 +129,8 @@ export default function HeroSection() {
                 href={MENU_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-pill btn-pill-filled"
+                className="btn-pill"
+                style={{ background: "#6b8520", color: "#F3ECDF", boxShadow: "0 8px 24px -10px rgba(74,94,23,0.6)" }}
               >
                 Explore the Menu
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -157,7 +147,8 @@ export default function HeroSection() {
                 href={MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-pill btn-pill-outline"
+                className="btn-pill"
+                style={{ background: "transparent", color: "#F3ECDF", border: "1px solid rgba(243,236,223,0.5)" }}
               >
                 Visit the Cafe
               </a>
@@ -189,7 +180,7 @@ export default function HeroSection() {
                   <span className="absolute left-5 top-0 w-1 h-6 bg-[color:var(--color-ivory)]/50 rounded-full animate-steam-delayed" />
                   <span className="block w-9 h-9 rounded-full bg-[color:var(--color-ivory)]/90 mt-6 flex items-center justify-center">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B100A" strokeWidth="1.5">
-                      <path d="M3 10h14v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-6zM17 12h2a3 3 0 0 1 0 6h-2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M3 10h14v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-6zM17 12h2a3 3 0 0 1 0 6h-2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
                 </div>

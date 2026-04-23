@@ -27,16 +27,17 @@ export default function FeatureCards() {
   );
 
   return (
-    <section ref={root} className="py-20 bg-[color:var(--color-ivory)]">
+    <section ref={root} className="relative z-10 pb-20 pt-0 -mt-20" style={{ background: "transparent" }}>
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="feat-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {FEATURE_CARDS.map((card) => (
             <div
               key={card.title}
-              className="feat-card group rounded-2xl overflow-hidden bg-[color:var(--color-parchment)] hover:shadow-xl transition-shadow duration-500"
+              className="feat-card group rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-500"
+              style={{ background: "#6b4535" }}
             >
               {/* Image */}
-              <div className="aspect-[16/9] relative overflow-hidden bg-wt-brown/10">
+              <div className="aspect-[16/9] relative overflow-hidden" style={{ background: "#3d2518" }}>
                 {card.image ? (
                   <Image
                     src={card.image}
@@ -46,7 +47,7 @@ export default function FeatureCards() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <span className="font-display text-lg text-wt-coffee/40">
+                    <span className="font-display text-lg" style={{ color: "rgba(243,236,223,0.3)" }}>
                       {card.title}
                     </span>
                   </div>
@@ -54,10 +55,10 @@ export default function FeatureCards() {
               </div>
               {/* Text */}
               <div className="p-5">
-                <p className="font-sans text-xs text-wt-brown-dark/60 mb-1.5">
+                <p className="font-sans text-xs mb-1.5" style={{ color: "rgba(243,236,223,0.55)" }}>
                   {card.subtitle}
                 </p>
-                <h3 className="font-display text-lg text-wt-coffee leading-tight">
+                <h3 className="font-display text-lg leading-tight" style={{ color: "#F3ECDF" }}>
                   {card.title}
                 </h3>
               </div>

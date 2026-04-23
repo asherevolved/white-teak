@@ -36,9 +36,15 @@
       "Bash(cd \"/c/Users/ADMIN/Desktop/White Teak/white-teak\" && npm run build 2>&1 | tail -40)",
       "WebSearch",
       "Bash(taskkill /F /IM chrome.exe)",
-      "Bash(taskkill /F /IM chromium.exe)"
+      "Bash(taskkill /F /IM chromium.exe)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "mcp__playwright__browser_run_code"
     ],
     "deny": [],
     "ask": []
+  },
+  "enabledPlugins": {
+    "pr-review-toolkit@claude-plugins-official": true,
+    "claude-hud@claude-hud": true
   }
 }

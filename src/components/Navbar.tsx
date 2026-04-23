@@ -45,9 +45,10 @@ export default function Navbar() {
       <nav
         className={`sticky top-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-[color:var(--color-ivory)]/85 backdrop-blur-xl border-b border-[color:var(--color-line)]/50 shadow-[0_8px_30px_-12px_rgba(27,16,10,0.12)]"
-            : "bg-[color:var(--color-ivory)]"
+            ? "backdrop-blur-md border-b border-white/10"
+            : ""
         }`}
+        style={{ background: scrolled ? "rgba(0,0,0,0.2)" : "transparent" }}
       >
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">

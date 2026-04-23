@@ -59,7 +59,8 @@ export default function NatureSection() {
     <section
       id="nature"
       ref={root}
-      className="relative py-24 lg:py-32 bg-[color:var(--color-espresso)] text-[color:var(--color-ivory)] overflow-hidden"
+      className="relative py-24 lg:py-32 overflow-hidden"
+      style={{ background: "transparent" }}
     >
       {/* Decorative */}
       <div
@@ -69,32 +70,21 @@ export default function NatureSection() {
           right: "-10%",
           width: "500px",
           height: "500px",
-          background: "radial-gradient(circle, #5B6B3E 0%, transparent 70%)",
-          opacity: 0.3,
-        }}
-      />
-      <div
-        className="blob"
-        style={{
-          bottom: "-10%",
-          left: "-5%",
-          width: "400px",
-          height: "400px",
-          background: "radial-gradient(circle, #B8935A 0%, transparent 70%)",
-          opacity: 0.18,
+          background: "radial-gradient(circle, #d4c9a0 0%, transparent 70%)",
+          opacity: 0.6,
         }}
       />
 
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="nature-head text-center mb-16 max-w-2xl mx-auto">
-          <p className="eyebrow-brass mb-4 !text-[color:var(--color-brass-soft)]">
+          <p className="eyebrow-brass mb-4" style={{ color: "#3D2817" }}>
             Escape · Breathe · Savor
           </p>
-          <h2 className="display-hero !text-[clamp(2.2rem,5.5vw,4.5rem)] text-[color:var(--color-ivory)]">
+          <h2 className="display-hero !text-[clamp(2.2rem,5.5vw,4.5rem)]" style={{ color: "#1B100A" }}>
             Nature&apos;s{" "}
-            <span className="font-script text-[color:var(--color-brass-soft)] italic">embrace</span>.
+            <span className="font-script italic" style={{ color: "#5a3a18" }}>embrace</span>.
           </h2>
-          <p className="font-sans text-[15px] text-[color:var(--color-ivory)]/70 mt-5 leading-relaxed">
+          <p className="font-sans text-[15px] mt-5 leading-relaxed" style={{ color: "rgba(27,16,10,0.7)" }}>
             A dining experience enveloped in warmth — open sky above, warm wood
             beneath, and the soft hum of the garden at your elbow.
           </p>
@@ -109,9 +99,8 @@ export default function NatureSection() {
                 src={src}
                 alt={CAPTIONS[i] ?? `Nature ${i + 1}`}
                 fill
-                className={`object-cover transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                  i === activeIndex ? "opacity-100 scale-100" : "opacity-0 scale-[1.05]"
-                }`}
+                className={`object-cover transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${i === activeIndex ? "opacity-100 scale-100" : "opacity-0 scale-[1.05]"
+                  }`}
               />
             ))}
             <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--color-ink)]/60 via-transparent to-transparent" />
@@ -129,11 +118,10 @@ export default function NatureSection() {
                   <button
                     key={i}
                     onClick={() => setActiveIndex(i)}
-                    className={`h-1 rounded-full transition-all duration-500 ${
-                      i === activeIndex
+                    className={`h-1 rounded-full transition-all duration-500 ${i === activeIndex
                         ? "w-10 bg-[color:var(--color-brass)]"
                         : "w-4 bg-[color:var(--color-ivory)]/40 hover:bg-[color:var(--color-ivory)]/70"
-                    }`}
+                      }`}
                     aria-label={`View image ${i + 1}`}
                   />
                 ))}
@@ -147,11 +135,10 @@ export default function NatureSection() {
               <button
                 key={i}
                 onClick={() => setActiveIndex(i)}
-                className={`nature-thumb relative shrink-0 w-40 lg:w-full aspect-[16/9] lg:aspect-auto lg:flex-1 rounded-xl overflow-hidden group transition-all duration-500 ${
-                  i === activeIndex
+                className={`nature-thumb relative shrink-0 w-40 lg:w-full aspect-[16/9] lg:aspect-auto lg:flex-1 rounded-xl overflow-hidden group transition-all duration-500 ${i === activeIndex
                     ? "ring-2 ring-[color:var(--color-brass)] opacity-100"
                     : "opacity-60 hover:opacity-90"
-                }`}
+                  }`}
               >
                 <Image
                   src={src}

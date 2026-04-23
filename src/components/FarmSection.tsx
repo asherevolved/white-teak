@@ -35,13 +35,13 @@ export default function FarmSection() {
   );
 
   return (
-    <section ref={root} className="py-20 bg-[color:var(--color-ivory)]">
+    <section ref={root} className="py-20" style={{ background: "transparent" }}>
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="farm-head text-center mb-12">
-          <h2 className="font-display text-3xl md:text-4xl text-wt-coffee">
+          <h2 className="font-display text-3xl md:text-4xl" style={{ color: "#F3ECDF" }}>
             From Heart to Hands, Farm to Cup
           </h2>
-          <p className="font-sans text-sm text-wt-brown-dark/70 mt-3 max-w-xl mx-auto">
+          <p className="font-sans text-sm mt-3 max-w-xl mx-auto" style={{ color: "rgba(243,236,223,0.65)" }}>
             Our Coffee Farms Nestled in Nature&apos;s Embrace
           </p>
         </div>
@@ -55,9 +55,8 @@ export default function FarmSection() {
                 src={src}
                 alt={`Coffee farm ${i + 1}`}
                 fill
-                className={`object-cover transition-opacity duration-700 ${
-                  i === activeIndex ? "opacity-100" : "opacity-0"
-                }`}
+                className={`object-cover transition-opacity duration-700 ${i === activeIndex ? "opacity-100" : "opacity-0"
+                  }`}
               />
             ))}
           </div>
@@ -68,11 +67,11 @@ export default function FarmSection() {
               <button
                 key={i}
                 onClick={() => setActiveIndex(i)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  i === activeIndex
-                    ? "bg-wt-coffee scale-110"
-                    : "bg-wt-brown-dark/30 hover:bg-wt-brown-dark/50"
-                }`}
+                className={`w-3 h-3 rounded-full transition-all ${i === activeIndex
+                    ? "scale-110"
+                    : "opacity-40 hover:opacity-70"
+                  }`}
+                style={{ background: i === activeIndex ? "#F3ECDF" : "rgba(243,236,223,0.35)" }}
                 aria-label={`View farm image ${i + 1}`}
               />
             ))}

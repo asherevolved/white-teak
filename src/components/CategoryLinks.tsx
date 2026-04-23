@@ -37,14 +37,15 @@ export default function CategoryLinks() {
   return (
     <section
       ref={root}
-      className="relative py-28 md:py-36 surface-paper"
+      className="relative py-28 md:py-36"
+      style={{ background: "#d4c9a8" }}
     >
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="text-center mb-20 max-w-2xl mx-auto">
-          <p className="eyebrow-brass mb-4">Explore · Savor · Repeat</p>
-          <h2 className="display-hero !text-[clamp(2.2rem,5vw,4rem)] text-[color:var(--color-espresso)]">
+          <p className="eyebrow-brass mb-4" style={{ color: "#3D2817" }}>Explore · Savor · Repeat</p>
+          <h2 className="display-hero !text-[clamp(2.2rem,5vw,4rem)]" style={{ color: "#1B100A" }}>
             A menu made for{" "}
-            <span className="font-script text-[color:var(--color-brass-deep)]">lingering</span>.
+            <span className="font-script" style={{ color: "#5a3a18" }}>lingering</span>.
           </h2>
         </div>
 
