@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -9,14 +10,14 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 type StoryBlock = {
   title: string;
+  image: string;
   paragraphs: string[];
-  icon: string;
 };
 
 const storyBlocks: StoryBlock[] = [
   {
     title: "The Coffee",
-    icon: "\u2615",
+    image: "/scroll track/ChatGPT_Image_Apr_29__2026__03_03_11_PM-removebg-preview.png",
     paragraphs: [
       "Along with being our founding-planter, we have chosen to work in direct trade relationships at origin with coffee estates and smallholder farmers, harvesting and processing coffees that we aim to curate into only SCA 85+ point scoring coffees.",
       'We take pride in the intentional introduction of White Teak "Cascara" coffee cherry tea, the dried skin of coffee cherries that can be brewed much like any other specialty tea.',
@@ -24,7 +25,7 @@ const storyBlocks: StoryBlock[] = [
   },
   {
     title: "The Teas",
-    icon: "\uD83C\uDF3F",
+    image: "/scroll track/ChatGPT_Image_Apr_29__2026__03_08_59_PM-removebg-preview.png",
     paragraphs: [
       "We source teas direct from farmers and craft them into unique blends in small batches. Freshness matters to us, so the menu stays focused and deliberate instead of overextended.",
       "We never choose flavor over health. Every blend is built with 100% natural ingredients and made to feel as clean as it tastes.",
@@ -32,7 +33,7 @@ const storyBlocks: StoryBlock[] = [
   },
   {
     title: "The Bakes",
-    icon: "\uD83C\uDF5E",
+    image: "/scroll track/ChatGPT_Image_Apr_29__2026__03_08_45_PM-removebg-preview.png",
     paragraphs: [
       "Our bakes come from a craft kitchen that treats comfort food with the same care we give coffee. Each recipe is developed in-house, from signature staples to seasonal additions.",
       "The result is food that feels familiar, but still specific to White Teak in texture, warmth, and detail.",
@@ -40,7 +41,7 @@ const storyBlocks: StoryBlock[] = [
   },
   {
     title: "Home Brewing",
-    icon: "\u2696\uFE0F",
+    image: "/scroll track/ChatGPT_Image_Apr_29__2026__03_11_42_PM-removebg-preview.png",
     paragraphs: [
       "We curate brewing equipment for people who want to take the White Teak ritual home, whether they are just starting out or refining a daily practice.",
       "The aim is not to overwhelm, but to make better brewing feel accessible, calm, and repeatable.",
@@ -48,7 +49,7 @@ const storyBlocks: StoryBlock[] = [
   },
   {
     title: "Events",
-    icon: "\uD83C\uDFB6",
+    image: "/scroll track/ChatGPT_Image_Apr_29__2026__03_26_30_PM-removebg-preview.png",
     paragraphs: [
       "We bring together communities across walks of life through specially curated events that celebrate coffee, craft, design, and conversation.",
       "This part of the story turns the cafe into a shared space for artists, makers, musicians, and social changemakers.",
@@ -61,11 +62,11 @@ export default function StorySection() {
 
   useGSAP(
     () => {
-      /* ── intro header ── */
       const introTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".story-intro",
           start: "top 84%",
+          toggleActions: "play none none reverse",
         },
       });
 
@@ -98,13 +99,8 @@ export default function StorySection() {
           "-=0.35"
         );
 
-      /* ── vertical line fill (scrub, only grows forward) ── */
-      const timelineFill = root.current?.querySelector(
-        ".timeline-fill"
-      ) as HTMLElement;
-      const timelineTrack = root.current?.querySelector(
-        ".timeline-track"
-      ) as HTMLElement;
+      const timelineFill = root.current?.querySelector(".timeline-fill") as HTMLElement;
+      const timelineTrack = root.current?.querySelector(".timeline-track") as HTMLElement;
 
       if (timelineTrack && timelineFill) {
         gsap.to(timelineFill, {
@@ -119,46 +115,40 @@ export default function StorySection() {
         });
       }
 
-      /* ── each item fires once when it scrolls in, never reverses ── */
-      gsap.utils
-        .toArray<HTMLElement>(".timeline-item")
-        .forEach((item, i) => {
-          const dot = item.querySelector(".timeline-dot") as HTMLElement;
-          const ring = item.querySelector(".timeline-ring") as HTMLElement;
-          const content = item.querySelector(".timeline-content") as HTMLElement;
-          const isLeft = i % 2 === 0;
+      gsap.utils.toArray<HTMLElement>(".timeline-item").forEach((item, i) => {
+        const dot = item.querySelector(".timeline-dot") as HTMLElement;
+        const ring = item.querySelector(".timeline-ring") as HTMLElement;
+        const content = item.querySelector(".timeline-content") as HTMLElement;
+        const isLeft = i % 2 === 0;
 
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: item,
-              start: "top 82%",
-              toggleActions: "play none none none",
-            },
-          });
-
-          // dot pops
-          tl.fromTo(
-            dot,
-            { scale: 0, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2)" }
-          );
-
-          // ring
-          tl.fromTo(
-            ring,
-            { scale: 0.4, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" },
-            "-=0.2"
-          );
-
-          // content slides in
-          tl.fromTo(
-            content,
-            { opacity: 0, x: isLeft ? -40 : 40, y: 16 },
-            { opacity: 1, x: 0, y: 0, duration: 0.6, ease: "expo.out" },
-            "-=0.25"
-          );
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: item,
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          },
         });
+
+        tl.fromTo(
+          dot,
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }
+        );
+
+        tl.fromTo(
+          ring,
+          { scale: 0.4, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" },
+          "-=0.2"
+        );
+
+        tl.fromTo(
+          content,
+          { opacity: 0, x: isLeft ? -40 : 40, y: 16 },
+          { opacity: 1, x: 0, y: 0, duration: 0.6, ease: "expo.out" },
+          "-=0.25"
+        );
+      });
     },
     { scope: root }
   );
@@ -170,16 +160,12 @@ export default function StorySection() {
       className="relative overflow-hidden py-24 lg:py-32"
       style={{ background: "transparent" }}
     >
-      {/* top hairline */}
-      <div className="absolute left-1/2 top-0 h-20 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[rgba(243,236,223,0.3)] to-transparent" />
-
       <div className="relative mx-auto max-w-[1140px] px-6 lg:px-12">
-        {/* ── intro ── */}
+        {/* intro */}
         <div className="story-intro max-w-[1040px]">
           <p className="story-eyebrow mb-4 font-sans text-[13px] font-semibold uppercase tracking-[0.24em] md:text-[15px]" style={{ color: "rgba(243,236,223,0.7)" }}>
             Our Story
           </p>
-
           <div className="story-headline max-w-[1040px] space-y-2" style={{ color: "#F3ECDF" }}>
             <p className="font-display text-[clamp(1.35rem,2.4vw,2.1rem)] leading-[1.35] tracking-[-0.01em] max-w-[980px]">
               <span className="italic">&quot;Filtered with Love&quot;</span>:
@@ -187,68 +173,61 @@ export default function StorySection() {
               love for specialty coffee and craft food.
             </p>
           </div>
-
           <div className="story-divider mt-10 h-px w-full max-w-[980px]" style={{ background: "rgba(243,236,223,0.25)" }} />
         </div>
 
-        {/* ── vertical timeline ── */}
+        {/* vertical timeline */}
         <div className="relative mt-20 lg:mt-28">
-          {/* track (faint) + fill (brass, grows with scroll) — bolder 3px line */}
           <div className="timeline-track absolute left-6 top-0 h-full w-[3px] rounded-full md:left-1/2 md:-translate-x-1/2">
             <div className="h-full w-full rounded-full" style={{ background: "rgba(243,236,223,0.15)" }} />
             <div
               className="timeline-fill absolute inset-0 origin-top rounded-full"
               style={{
                 transform: "scaleY(0)",
-                background:
-                  "linear-gradient(to bottom, var(--color-brass), var(--color-brass-deep))",
+                background: "linear-gradient(to bottom, var(--color-brass), var(--color-brass-deep))",
                 boxShadow: "0 0 10px rgba(184,147,90,0.25)",
               }}
             />
           </div>
 
-          {/* timeline items */}
           <div className="space-y-20 md:space-y-28">
             {storyBlocks.map((block, index) => {
               const isLeft = index % 2 === 0;
 
               return (
-                <div
-                  key={block.title}
-                  className="timeline-item relative pl-16 md:pl-0"
-                >
-                  {/* ── dot + ring on the line ── */}
+                <div key={block.title} className="timeline-item relative pl-16 md:pl-0">
+                  {/* badge image on the line */}
                   <div
                     className={`
-                      absolute top-2
+                      absolute top-0
                       left-6 -translate-x-1/2
                       md:left-1/2 md:-translate-x-1/2
                       z-10 flex items-center justify-center
                     `}
                   >
-                    {/* outer ring */}
-                    <div className="timeline-ring absolute h-11 w-11 rounded-full border-[1.5px] border-[color:var(--color-brass)]/30" />
-                    {/* inner dot with icon */}
-                    <div className="timeline-dot flex h-8 w-8 items-center justify-center rounded-full bg-[color:var(--color-brass)] text-xs shadow-[0_0_16px_rgba(184,147,90,0.4)]">
-                      <span className="text-[12px] leading-none">
-                        {block.icon}
-                      </span>
+                    <div className="timeline-ring absolute h-28 w-28 rounded-full border-[1.5px] border-[color:var(--color-brass)]/30" />
+                    <div className="timeline-dot h-24 w-24 rounded-full overflow-hidden shadow-[0_0_20px_rgba(184,147,90,0.35)]">
+                      <Image
+                        src={block.image}
+                        alt={block.title}
+                        width={96}
+                        height={96}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   </div>
 
-                  {/* ── content card ── */}
+                  {/* content card */}
                   <div
                     className={`
                       timeline-content
-                      md:w-[calc(50%-44px)]
+                      md:w-[calc(50%-56px)]
                       ${isLeft ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"}
                       ${isLeft ? "md:text-right" : "md:text-left"}
+                      pt-20 md:pt-2
                     `}
                   >
-                    {/* number + title */}
-                    <div
-                      className={`flex items-center gap-3 ${isLeft ? "md:flex-row-reverse" : ""}`}
-                    >
+                    <div className={`flex items-center gap-3 ${isLeft ? "md:flex-row-reverse" : ""}`}>
                       <span className="font-sans text-[11px] uppercase tracking-[0.28em] text-[color:var(--color-brass-deep)]">
                         {String(index + 1).padStart(2, "0")}
                       </span>
@@ -257,17 +236,13 @@ export default function StorySection() {
                       </h3>
                     </div>
 
-                    {/* thin brass accent line */}
-                    <div
-                      className={`my-4 h-[1.5px] w-12 bg-[color:var(--color-brass)]/40 ${isLeft ? "md:ml-auto" : ""}`}
-                    />
+                    <div className={`my-4 h-[1.5px] w-12 bg-[color:var(--color-brass)]/40 ${isLeft ? "md:ml-auto" : ""}`} />
 
-                    {/* paragraphs */}
                     <div className="space-y-4">
                       {block.paragraphs.map((paragraph) => (
                         <p
                           key={paragraph}
-                          className={`font-sans text-[15px] leading-[1.8] ${isLeft ? "md:ml-auto" : ""} max-w-[52ch]`}
+                          className={`font-sans text-[17px] leading-[1.8] ${isLeft ? "md:ml-auto" : ""} max-w-[52ch]`}
                           style={{ color: "rgba(243,236,223,0.78)" }}
                         >
                           {paragraph}
@@ -280,7 +255,6 @@ export default function StorySection() {
             })}
           </div>
 
-          {/* bottom cap of the line */}
           <div className="absolute bottom-0 left-6 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2">
             <div className="h-3.5 w-3.5 rounded-full bg-[color:var(--color-brass-deep)] shadow-[0_0_10px_rgba(184,147,90,0.35)]" />
           </div>

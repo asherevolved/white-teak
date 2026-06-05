@@ -8,13 +8,12 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 /*
- * GSAP scroll-animated gradient.
+ * GSAP scroll-animated gradient — near-solid variant.
  *
- * A single GSAP timeline tweens 9 colour channels (top/mid/bottom × R/G/B)
- * through a series of keyframes. The timeline is scrubbed to full-page
- * scroll via ScrollTrigger, so the gradient actively animates as the
- * user scrolls. Each section's portion of the timeline is proportional
- * to the section's height on the page.
+ * Each section is rendered as an almost-solid colour with a very subtle
+ * radial vignette for depth. GSAP tweens the colour channels with
+ * power1.inOut easing for silky-smooth transitions between sections.
+ * scrub: 1.5 adds extra smoothing so the colour shift feels organic.
  */
 
 /* ─── Hex → RGB helper ─── */
@@ -42,18 +41,27 @@ function makeState(top: string, mid: string, bot: string): ColorState {
 }
 
 /**
- * Section definitions: selector + gradient colours.
+ * Section definitions: selector + near-solid colours.
+ * top/mid/bottom are very close for a solid feel with subtle depth.
  * The order must match the DOM order on the page.
  */
 const SECTIONS = [
-  { sel: "#hero",                        ...makeState("#4a5e17", "#3d6f2c", "#218048") },
-  { sel: "main > section:nth-child(2)",  ...makeState("#7d1713", "#923318", "#a63a1c") },
-  { sel: "#nature",                      ...makeState("#b8aa84", "#c4b896", "#d6c7a3") },
-  { sel: "#story",                       ...makeState("#815638", "#6b4535", "#55372a") },
-  { sel: "main > section:nth-child(5)",  ...makeState("#55372a", "#4d3324", "#3a2218") },
-  { sel: "main > section:nth-child(6)",  ...makeState("#2b1a14", "#231410", "#1a0f0b") },
-  { sel: "#testimonials",                ...makeState("#1a0f0b", "#130a07", "#0d0604") },
-  { sel: "#footer",                      ...makeState("#0d0604", "#050302", "#000000") },
+  // Hero — olive green (solid feel)
+  { sel: "#hero",                        ...makeState("#465a18", "#4a5e17", "#425615") },
+  // Menu — deep crimson (solid feel)
+  { sel: "main > section:nth-child(2)",  ...makeState("#7a1a16", "#7d1713", "#711512") },
+  // Nature Embrace — warm sand (solid feel)
+  { sel: "#nature",                      ...makeState("#bdb08a", "#b8aa84", "#b0a37e") },
+  // Story — roasted brown (solid feel)
+  { sel: "#story",                       ...makeState("#86593b", "#815638", "#7a5135") },
+  // Farm — deeper earthy brown (solid feel)
+  { sel: "main > section:nth-child(5)",  ...makeState("#503627", "#4d3324", "#483022") },
+  // Feature Cards — dark brown (solid feel)
+  { sel: "main > section:nth-child(6)",  ...makeState("#2e1d16", "#2b1a14", "#281812") },
+  // Reviews — near-black coffee (solid feel)
+  { sel: "#testimonials",                ...makeState("#1d120d", "#1a0f0b", "#170d09") },
+  // Footer — black (solid)
+  { sel: "#footer",                      ...makeState("#080503", "#050302", "#000000") },
 ];
 
 export default function ScrollGradient() {
@@ -66,9 +74,10 @@ export default function ScrollGradient() {
     // Proxy object that GSAP tweens — holds the current RGB channels
     const proxy: ColorState = { ...SECTIONS[0] };
 
-    // Render the gradient from current proxy values
+    // Render a fully solid bg using the mid colour to avoid any visible banding
     const render = () => {
-      el.style.background = `linear-gradient(180deg, rgb(${Math.round(proxy.tR)},${Math.round(proxy.tG)},${Math.round(proxy.tB)}) 0%, rgb(${Math.round(proxy.mR)},${Math.round(proxy.mG)},${Math.round(proxy.mB)}) 50%, rgb(${Math.round(proxy.bR)},${Math.round(proxy.bG)},${Math.round(proxy.bB)}) 100%)`;
+      const m = `rgb(${Math.round(proxy.mR)},${Math.round(proxy.mG)},${Math.round(proxy.mB)})`;
+      el.style.background = m;
     };
 
     // Set initial gradient
@@ -93,7 +102,7 @@ export default function ScrollGradient() {
         trigger: document.documentElement,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1, // 1-second smoothing for buttery feel
+        scrub: 1.5, // extra smoothing for buttery transitions
         onUpdate: render,
       },
     });
@@ -111,7 +120,7 @@ export default function ScrollGradient() {
           mR: sec.mR, mG: sec.mG, mB: sec.mB,
           bR: sec.bR, bG: sec.bG, bB: sec.bB,
           duration,
-          ease: "none",
+          ease: "power1.inOut",
         },
         elapsed
       );

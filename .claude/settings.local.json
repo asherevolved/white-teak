@@ -38,7 +38,14 @@
       "Bash(taskkill /F /IM chrome.exe)",
       "Bash(taskkill /F /IM chromium.exe)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
-      "mcp__playwright__browser_run_code"
+      "mcp__playwright__browser_run_code",
+      "Bash(mv \"AUBREY1__.TTF\" \"Aubrey.ttf\")",
+      "Bash(mv \"Black Mango Regular.ttf\" \"BlackMango-Regular.ttf\")",
+      "Bash(mv \"Aubrey.ttf\" \"AUBREY1__.TTF\")",
+      "Bash(mv \"BlackMango-Regular.ttf\" \"Black Mango Regular.ttf\")",
+      "PowerShell(Rename-Item -Path \"c:\\\\Users\\\\ADMIN\\\\Desktop\\\\White Teak\\\\white-teak\\\\public\\\\fonts\\\\AUBREY1__.TTF\" -NewName \"aubrey.ttf\" -Force)",
+      "PowerShell(Rename-Item -Path \"c:\\\\Users\\\\ADMIN\\\\Desktop\\\\White Teak\\\\white-teak\\\\public\\\\fonts\\\\Black Mango Regular.ttf\" -NewName \"black-mango-regular.ttf\" -Force)",
+      "Bash(npm install *)"
     ],
     "deny": [],
     "ask": []

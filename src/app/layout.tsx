@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, Caveat } from "next/font/google";
+import { Fraunces, Inter, Caveat, Cinzel } from "next/font/google";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -13,6 +13,13 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+});
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  variable: "--font-logo",
+  display: "swap",
+  weight: ["400", "700"],
 });
 
 const caveat = Caveat({
@@ -35,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${inter.variable} ${caveat.variable} antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${caveat.variable} ${cinzel.variable} antialiased`}
     >
       <body className="min-h-screen">{children}</body>
     </html>

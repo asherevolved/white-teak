@@ -51,25 +51,6 @@ export default function FoodGallery() {
       className="relative py-24 lg:py-28 overflow-hidden"
       style={{ background: "transparent" }}
     >
-      {/* Shimmer overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 120% 80% at 60% -10%, rgba(220,100,80,0.1) 0%, transparent 60%)",
-        }}
-      />
-      {/* Decorative blobs */}
-      <div
-        className="blob"
-        style={{
-          top: "-10%", right: "-5%",
-          width: "380px", height: "380px",
-          background: "radial-gradient(circle, #c4352f 0%, transparent 70%)",
-          opacity: 0.4,
-          position: "absolute",
-        }}
-      />
       {/* Header */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="food-head flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">

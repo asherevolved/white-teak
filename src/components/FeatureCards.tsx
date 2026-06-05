@@ -27,7 +27,7 @@ export default function FeatureCards() {
   );
 
   return (
-    <section ref={root} className="relative z-10 pb-20 pt-0 -mt-20" style={{ background: "transparent" }}>
+    <section ref={root} className="relative z-10 pb-20 pt-24 mt-0" style={{ background: "transparent" }}>
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="feat-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {FEATURE_CARDS.map((card) => (
