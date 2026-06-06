@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, Caveat, Cinzel } from "next/font/google";
+import { Libre_Baskerville, Raleway, Cinzel } from "next/font/google";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
   variable: "--font-serif",
   display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
+  weight: ["400", "700"],
+  style: ["normal"],
 });
 
-const inter = Inter({
+const raleway = Raleway({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const cinzel = Cinzel({
@@ -20,12 +22,6 @@ const cinzel = Cinzel({
   variable: "--font-logo",
   display: "swap",
   weight: ["400", "700"],
-});
-
-const caveat = Caveat({
-  subsets: ["latin"],
-  variable: "--font-script",
-  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -42,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${inter.variable} ${caveat.variable} ${cinzel.variable} antialiased`}
+      className={`${libreBaskerville.variable} ${raleway.variable} ${cinzel.variable} antialiased`}
     >
       <body className="min-h-screen">{children}</body>
     </html>

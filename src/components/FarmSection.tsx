@@ -1,16 +1,25 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const arrivals = [
-  { tag: "Single Origin", name: "Ethiopia Yirgacheffe", note: "Floral · Citrus · Honey" },
-  { tag: "Limited Roast", name: "Colombia Geisha", note: "Jasmine · Bergamot · Stone Fruit" },
-  { tag: "Cold Brew", name: "Kenya AA Reserve", note: "Blackcurrant · Cocoa · Bright" },
+const DISHES = [
+  "Fresh Mango Cake",
+  "Fresh Mango Cheesecake",
+  "Mango Matcha Latte",
+  "Mango White Chocolate French Toast",
+  "Mango White Chocolate Pancake",
+  "Mango White Chocolate Waffle",
+  "Mango Yogurt Granola Bowl",
+  "Mango Sticky Oats",
+  "Mango Coconut Oats Bowl",
+  "Raw Mango & Papaya Salad",
+  "Mango Brownie Crumble",
 ];
 
 export default function FarmSection() {
@@ -18,22 +27,27 @@ export default function FarmSection() {
 
   useGSAP(
     () => {
-      gsap.from(".arrivals-head > *", {
-        y: 30,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".arrivals-head", start: "top 85%" },
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        scrollTrigger: { trigger: root.current, start: "top 75%", once: true },
       });
 
-      gsap.from(".arrival-card", {
-        opacity: 0,
-        y: 40,
-        stagger: 0.08,
-        duration: 0.7,
-        ease: "expo.out",
-        scrollTrigger: { trigger: ".arrivals-grid", start: "top 80%" },
+      tl.from(".mango-branch", { y: -60, opacity: 0, duration: 1.1, ease: "power2.out" })
+        .from(".sa-title", { x: -50, opacity: 0, duration: 1 }, "-=0.7")
+        .from(".sa-eyebrow", { y: 16, opacity: 0, duration: 0.6 }, "-=0.6")
+        .from(".dish-item", { x: -24, opacity: 0, stagger: 0.07, duration: 0.5 }, "-=0.4")
+        .from(".dishes-photo", { scale: 0.9, opacity: 0, duration: 1.1, ease: "expo.out" }, "-=0.9");
+
+      // Gentle continuous sway on the mango branch.
+      gsap.to(".mango-branch", {
+        rotate: 2,
+        transformOrigin: "top right",
+        duration: 4,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
       });
     },
     { scope: root }
@@ -43,103 +57,59 @@ export default function FarmSection() {
     <section
       id="arrivals"
       ref={root}
-      className="py-20 lg:py-28"
+      className="relative overflow-hidden py-16 lg:py-20"
       style={{ background: "transparent" }}
     >
-      <div className="max-w-[1100px] mx-auto px-6 lg:px-12">
-        <div className="arrivals-head text-center mb-10">
-          <p
-            className="font-sans text-[13px] font-semibold uppercase tracking-[0.24em] mb-3"
-            style={{ color: "rgba(243,236,223,0.7)" }}
-          >
-            Just In
-          </p>
-          <h2
-            className="font-display text-3xl md:text-4xl lg:text-5xl"
-            style={{ color: "#F3ECDF" }}
-          >
-            New Arrivals
-          </h2>
-          <p
-            className="font-sans text-sm mt-3 max-w-xl mx-auto"
-            style={{ color: "rgba(243,236,223,0.65)" }}
-          >
-            Freshly landed beans, blends, and small-batch curiosities from our roastery.
-          </p>
-        </div>
+      {/* Mango branch — top-right corner art */}
+      <Image
+        src="/mango-branch.png"
+        alt=""
+        aria-hidden
+        width={800}
+        height={500}
+        className="mango-branch pointer-events-none absolute right-0 top-0 w-[65%] max-w-[900px] select-none lg:w-[58%]"
+      />
 
-        <div className="arrivals-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {arrivals.map((item, i) => (
-            <div
-              key={i}
-              className="arrival-card group relative overflow-hidden rounded-xl border p-4 transition-transform duration-500 hover:-translate-y-1"
-              style={{
-                borderColor: "rgba(243,236,223,0.12)",
-                background:
-                  "linear-gradient(180deg, rgba(243,236,223,0.04), rgba(243,236,223,0.015))",
-              }}
-            >
-              {/* Placeholder visual */}
-              <div
-                className="aspect-[4/3] w-full rounded-lg mb-3 flex items-center justify-center relative overflow-hidden"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(184,147,90,0.18), rgba(184,147,90,0.04))",
-                  border: "1px solid rgba(184,147,90,0.18)",
-                }}
+      <div className="relative mx-auto max-w-[1320px] px-6 lg:px-10">
+        {/* Title art */}
+        <p className="sa-eyebrow mb-2 font-sans text-[12px] font-semibold uppercase tracking-[0.32em] text-[#7A3B1E]">
+          New Arrivals
+        </p>
+        <Image
+          src="/summer-affair-title.png"
+          alt="The Summer Affair"
+          width={520}
+          height={300}
+          className="sa-title -mb-4 w-[340px] sm:w-[560px] lg:-mb-10 lg:w-[820px]"
+        />
+
+        <div className="relative z-10 grid grid-cols-1 items-start gap-6 lg:grid-cols-[300px_1fr] lg:gap-12">
+          {/* Dish list */}
+          <ul className="space-y-2.5 lg:-mt-52">
+            {DISHES.map((dish) => (
+              <li
+                key={dish}
+                className="dish-item font-display text-[1.35rem] font-semibold leading-snug text-[#5A2E12]"
               >
-                <span
-                  className="font-display text-5xl opacity-30"
-                  style={{ color: "var(--color-brass)" }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div
-                  className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] uppercase tracking-[0.18em] font-sans"
-                  style={{
-                    background: "rgba(20,15,10,0.55)",
-                    color: "#F3ECDF",
-                    border: "1px solid rgba(243,236,223,0.18)",
-                  }}
-                >
-                  {item.tag}
-                </div>
-              </div>
+                {dish}
+              </li>
+            ))}
+            <li className="dish-item pl-6 font-display text-[1.2rem] text-[#7A3B1E]">
+              — with ice cream
+            </li>
+          </ul>
 
-              <h3
-                className="font-display text-base md:text-lg leading-tight"
-                style={{ color: "#F3ECDF" }}
-              >
-                {item.name}
-              </h3>
-              <p
-                className="font-sans text-xs mt-1"
-                style={{ color: "rgba(243,236,223,0.6)" }}
-              >
-                {item.note}
-              </p>
-
-              <div
-                className="mt-3 h-px w-full"
-                style={{ background: "rgba(243,236,223,0.1)" }}
-              />
-
-              <div className="mt-2.5 flex items-center justify-between">
-                <span
-                  className="font-sans text-[10px] uppercase tracking-[0.24em]"
-                  style={{ color: "var(--color-brass-deep)" }}
-                >
-                  Coming Soon
-                </span>
-                <span
-                  className="font-sans text-sm transition-transform duration-300 group-hover:translate-x-1"
-                  style={{ color: "var(--color-brass)" }}
-                >
-                  →
-                </span>
-              </div>
-            </div>
-          ))}
+          {/* Polaroid dishes photo */}
+          <div className="dishes-photo lg:-mt-52">
+            <Image
+              src="/mango-dishes.png"
+              alt="Mango dish collection — cakes, cheesecake, pancakes, waffles, bowls and salad"
+              width={1200}
+              height={680}
+              className="h-auto w-full drop-shadow-[0_24px_48px_rgba(120,70,10,0.28)]"
+              priority={false}
+            />
+          </div>
         </div>
       </div>
     </section>

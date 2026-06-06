@@ -16,6 +16,24 @@ export const MENU_URL = "https://whiteteak.dotpe.in/catalog/499195/568418";
 export const MAPS_URL =
   "https://www.google.com/maps/dir//D13%2FB,+Gokulam+Main+Rd,+Vani+Vilas+Mohalla,+Mysuru,+Karnataka+570002/@12.3282263,76.5461313,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3baf7b6d8a3f990f:0xab0db788a2ac2962!2m2!1d76.6285332!2d12.3282387?entry=ttu";
 
+export const LOCATIONS = [
+  {
+    name: "Gokulam",
+    hours: "7 AM – 11 PM",
+    mapUrl: "https://maps.app.goo.gl/moxAK2FQvw7uPfEv7",
+  },
+  {
+    name: "Kavi Mane",
+    hours: "11 AM – 9 PM",
+    mapUrl: "https://maps.app.goo.gl/WfUXMxy5b121QkMu5",
+  },
+  {
+    name: "Sainikpuri",
+    hours: "7 AM – 12 AM",
+    mapUrl: "https://maps.app.goo.gl/yZ2Ra8chnnLyr1QL8",
+  },
+];
+
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/whiteteakroasters/?hl=en",
   facebook: "https://www.facebook.com/whiteteakroasters/",

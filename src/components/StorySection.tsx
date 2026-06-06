@@ -168,7 +168,7 @@ export default function StorySection() {
           </p>
           <div className="story-headline max-w-[1040px] space-y-2" style={{ color: "#F3ECDF" }}>
             <p className="font-display text-[clamp(1.35rem,2.4vw,2.1rem)] leading-[1.35] tracking-[-0.01em] max-w-[980px]">
-              <span className="italic">&quot;Filtered with Love&quot;</span>:
+              <span>&quot;Filtered with Love&quot;</span>:
               being the foundation for our all-day cafe born out of a mutual
               love for specialty coffee and craft food.
             </p>
@@ -196,6 +196,9 @@ export default function StorySection() {
 
               return (
                 <div key={block.title} className="timeline-item relative pl-16 md:pl-0">
+                  {block.title === "Events" && (
+                    <div id="mango-start" aria-hidden className="absolute left-0 top-1/2 h-0 w-0" />
+                  )}
                   {/* badge image on the line */}
                   <div
                     className={`

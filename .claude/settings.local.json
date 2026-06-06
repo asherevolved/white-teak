@@ -45,7 +45,17 @@
       "Bash(mv \"BlackMango-Regular.ttf\" \"Black Mango Regular.ttf\")",
       "PowerShell(Rename-Item -Path \"c:\\\\Users\\\\ADMIN\\\\Desktop\\\\White Teak\\\\white-teak\\\\public\\\\fonts\\\\AUBREY1__.TTF\" -NewName \"aubrey.ttf\" -Force)",
       "PowerShell(Rename-Item -Path \"c:\\\\Users\\\\ADMIN\\\\Desktop\\\\White Teak\\\\white-teak\\\\public\\\\fonts\\\\Black Mango Regular.ttf\" -NewName \"black-mango-regular.ttf\" -Force)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(git -C \"c:\\\\Users\\\\ADMIN\\\\Desktop\\\\White Teak\\\\white-teak\" log --oneline -5)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'docs: add footer redesign design spec *)",
+      "Bash(git checkout *)",
+      "Bash(echo \"---exit:$?\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\('gsap:', p.dependencies?.gsap||p.devDependencies?.gsap\\); console.log\\('@gsap/react:', p.dependencies?.['@gsap/react']||p.devDependencies?.['@gsap/react']\\)\")",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const p=JSON.parse\\(d\\);console.log\\('playwright:',p.devDependencies?.['@playwright/test']||p.dependencies?.playwright||p.devDependencies?.playwright||'none'\\)}\\)\")",
+      "Bash(npx --yes playwright@latest install chromium)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Users/ADMIN/AppData/Local/ms-playwright/**)"
     ],
     "deny": [],
     "ask": []

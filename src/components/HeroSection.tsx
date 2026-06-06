@@ -108,7 +108,7 @@ export default function HeroSection() {
               <span className="hero-title-line block overflow-hidden">
                 <span className="block">
                   and cuisine{" "}
-                  <span className="font-script italic font-normal" style={{ color: "#c8d96a" }}>
+                  <span className="font-script font-normal" style={{ color: "#c8d96a" }}>
                     harmonize
                   </span>
                 </span>

@@ -66,7 +66,7 @@ export default function FoodGallery() {
               style={{ color: "#FBF0EE" }}
             >
               Crafted food
-              <span className="font-script italic" style={{ color: "#f0b8a8" }}> & </span>
+              <span className="font-script" style={{ color: "#f0b8a8" }}> & </span>
               drinks.
             </h2>
           </div>

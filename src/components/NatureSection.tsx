@@ -82,7 +82,7 @@ export default function NatureSection() {
           </p>
           <h2 className="display-hero !text-[clamp(2.2rem,5.5vw,4.5rem)]" style={{ color: "#1B100A" }}>
             Nature&apos;s{" "}
-            <span className="font-script italic" style={{ color: "#5a3a18" }}>embrace</span>.
+            <span className="font-script" style={{ color: "#5a3a18" }}>embrace</span>.
           </h2>
           <p className="font-sans text-[15px] mt-5 leading-relaxed" style={{ color: "rgba(27,16,10,0.7)" }}>
             A dining experience enveloped in warmth — open sky above, warm wood

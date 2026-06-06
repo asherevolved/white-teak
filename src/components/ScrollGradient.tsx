@@ -54,8 +54,10 @@ const SECTIONS = [
   { sel: "#nature",                      ...makeState("#bdb08a", "#b8aa84", "#b0a37e") },
   // Story — roasted brown (solid feel)
   { sel: "#story",                       ...makeState("#86593b", "#815638", "#7a5135") },
-  // Farm — deeper earthy brown (solid feel)
-  { sel: "main > section:nth-child(5)",  ...makeState("#503627", "#4d3324", "#483022") },
+  // Events chapter (inside Story) → mango yellow begins here
+  { sel: "#mango-start",                 ...makeState("#FFD93B", "#FFCB2D", "#F7B924") },
+  // Farm / Arrivals — mango yellow (Summer Affair) continues
+  { sel: "main > section:nth-child(5)",  ...makeState("#FFD93B", "#FFCB2D", "#F7B924") },
   // Feature Cards — dark brown (solid feel)
   { sel: "main > section:nth-child(6)",  ...makeState("#2e1d16", "#2b1a14", "#281812") },
   // Reviews — near-black coffee (solid feel)
@@ -83,53 +85,64 @@ export default function ScrollGradient() {
     // Set initial gradient
     render();
 
-    // Measure each section's height to proportion the timeline
-    const pageHeight = document.documentElement.scrollHeight;
-    const weights: number[] = [];
+    // Apply a colour state to the proxy (no tween — used for instant snaps).
+    const apply = (s: ColorState) => {
+      Object.assign(proxy, s);
+      render();
+    };
 
-    for (const sec of SECTIONS) {
-      const target = document.querySelector(sec.sel) as HTMLElement;
-      if (target) {
-        weights.push(target.offsetHeight / pageHeight);
-      } else {
-        weights.push(1 / SECTIONS.length); // fallback
-      }
-    }
+    // One ScrollTrigger per section boundary. Each fires when that section's
+    // TOP crosses the middle of the viewport, tweening to that section's colour.
+    // This uses each element's REAL position (immune to smooth-scroll/weight
+    // mismeasurement), so the yellow band reliably covers Events → Arrivals.
+    const triggers = SECTIONS.map((sec, i) => {
+      const target = document.querySelector(sec.sel) as HTMLElement | null;
+      if (!target) return null;
 
-    // Build the timeline — each .to() transitions to the next section's colors
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1.5, // extra smoothing for buttery transitions
-        onUpdate: render,
-      },
-    });
-
-    // Add tweens for each section transition
-    let elapsed = 0;
-    for (let i = 1; i < SECTIONS.length; i++) {
-      const sec = SECTIONS[i];
-      const duration = weights[i - 1]; // duration of the PREVIOUS section
-
-      tl.to(
-        proxy,
-        {
+      const colorTo = () =>
+        gsap.to(proxy, {
           tR: sec.tR, tG: sec.tG, tB: sec.tB,
           mR: sec.mR, mG: sec.mG, mB: sec.mB,
           bR: sec.bR, bG: sec.bG, bB: sec.bB,
-          duration,
+          duration: 0.6,
           ease: "power1.inOut",
-        },
-        elapsed
-      );
+          overwrite: "auto",
+          onUpdate: render,
+        });
 
-      elapsed += duration;
-    }
+      // Previous section's colour, for scrolling back up past this boundary.
+      const prev = SECTIONS[i - 1];
+      const colorBack = () =>
+        prev &&
+        gsap.to(proxy, {
+          tR: prev.tR, tG: prev.tG, tB: prev.tB,
+          mR: prev.mR, mG: prev.mG, mB: prev.mB,
+          bR: prev.bR, bG: prev.bG, bB: prev.bB,
+          duration: 0.6,
+          ease: "power1.inOut",
+          overwrite: "auto",
+          onUpdate: render,
+        });
 
-    // Hold the final colour for the last section's duration
-    tl.to(proxy, { duration: weights[weights.length - 1] }, elapsed);
+      return ScrollTrigger.create({
+        trigger: target,
+        start: "top 55%",
+        onEnter: colorTo,
+        onEnterBack: colorTo,
+        onLeaveBack: colorBack,
+      });
+    });
+
+    // Re-measure once layout has settled (images, fonts, smooth-scroll).
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refresh);
+    const t = setTimeout(refresh, 600);
+
+    return () => {
+      window.removeEventListener("load", refresh);
+      clearTimeout(t);
+      triggers.forEach((tr) => tr?.kill());
+    };
   });
 
   return (

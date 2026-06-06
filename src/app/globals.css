@@ -60,9 +60,9 @@
   --color-wt-red-light: #EBE0D0;
   --color-wt-red: #B9623F;
 
-  --font-display: var(--font-serif), "Fraunces", Georgia, serif;
-  --font-sans: var(--font-sans), "Inter", system-ui, sans-serif;
-  --font-script: var(--font-script), "Caveat", cursive;
+  --font-display: var(--font-serif), "Libre Baskerville", Georgia, serif;
+  --font-sans: var(--font-sans), "Raleway", system-ui, sans-serif;
+  --font-script: var(--font-serif), "Libre Baskerville", Georgia, serif;
 
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
@@ -95,6 +95,7 @@ body {
   background-color: transparent;
   color: var(--color-espresso);
   font-family: var(--font-sans);
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -129,23 +130,25 @@ body::after {
 
 .font-script {
   font-family: var(--font-script);
+  font-style: normal;
 }
 
 .display-xl {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 700;
+  font-style: normal;
   font-size: clamp(3rem, 9vw, 8rem);
-  line-height: 0.92;
-  letter-spacing: -0.025em;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
 }
 
 .display-hero {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 400;
+  font-style: normal;
   font-size: clamp(2.5rem, 6.5vw, 5.5rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  font-variation-settings: "SOFT" 80, "WONK" 0, "opsz" 144;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
 
 .eyebrow {
@@ -187,10 +190,10 @@ body::after {
 
 .script-accent {
   font-family: var(--font-script);
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: var(--color-brass-deep);
-  font-weight: 500;
-  font-style: italic;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* === Cards === */
@@ -577,7 +580,7 @@ body::after {
   line-height: 0.85;
   padding: 0.25rem 0.75rem 0 0;
   color: var(--color-brass-deep);
-  font-style: italic;
+  font-style: normal;
 }
 
 /* Image frame with inner border */

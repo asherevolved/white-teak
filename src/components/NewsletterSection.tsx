@@ -15,65 +15,20 @@ export default function NewsletterSection() {
 
   useGSAP(
     () => {
-      // Staggered reveal of inner elements
-      gsap.from(".nl-reveal", {
-        y: 30,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 0.9,
-        ease: "expo.out",
-        scrollTrigger: { trigger: ".newsletter-inner", start: "top 85%" },
-      });
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      // Headline word-by-word reveal
-      gsap.from(".nl-word", {
-        y: 40,
-        opacity: 0,
-        stagger: 0.07,
-        duration: 0.9,
-        ease: "expo.out",
-        scrollTrigger: { trigger: ".newsletter-inner", start: "top 85%" },
-        delay: 0.15,
-      });
-
-      // Top glow drift
-      gsap.to(".nl-glow", {
-        x: 40,
-        duration: 8,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
-
-      // Steam wisps loop
-      gsap.utils.toArray<HTMLElement>(".nl-steam").forEach((el, i) => {
-        gsap.fromTo(
-          el,
-          { y: 0, opacity: 0, scaleX: 1 },
-          {
-            y: -36,
-            opacity: 0.5,
-            scaleX: 1.4,
-            duration: 2.4,
-            ease: "power1.out",
-            repeat: -1,
-            delay: i * 0.5,
-            keyframes: {
-              opacity: [0, 0.5, 0],
-              y: [0, -36],
-              scaleX: [1, 1.4],
-            },
-          }
-        );
-      });
-
-      // Corner ornaments slow rotate
-      gsap.to(".nl-corner", {
-        rotate: 360,
-        duration: 60,
-        ease: "none",
-        repeat: -1,
-      });
+      gsap.fromTo(
+        ".nl-item",
+        { opacity: 0, y: 22 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.11,
+          duration: 1.1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: root.current, start: "top 78%", once: true },
+        }
+      );
     },
     { scope: root }
   );
@@ -83,180 +38,116 @@ export default function NewsletterSection() {
     if (!email) return;
     setSubmitted(true);
     setEmail("");
-    gsap.from(".nl-success", {
-      y: 12,
-      opacity: 0,
-      duration: 0.5,
-      ease: "power2.out",
-    });
+    gsap.fromTo(
+      ".nl-success",
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }
+    );
   };
 
   return (
     <section
-      id="newsletter"
       ref={root}
-      className="pt-4 pb-4 lg:pt-6 lg:pb-6"
+      id="newsletter"
       style={{ background: "transparent" }}
+      className="px-6 py-16 lg:px-12 lg:py-20"
     >
-      <div className="max-w-[1100px] mx-auto px-6 lg:px-12">
+      <div className="mx-auto max-w-[720px]">
+        {/* Card */}
         <div
-          className="newsletter-inner relative overflow-hidden px-6 pt-4 pb-4 md:px-12 md:pt-6 md:pb-6 text-center"
-          style={{ background: "transparent" }}
+          className="relative overflow-hidden rounded-xl px-8 py-12 text-center md:px-14 md:py-14"
+          style={{
+            background: "var(--color-ivory)",
+            boxShadow: "0 40px 80px -20px rgba(11,7,4,0.55)",
+          }}
         >
+          {/* Subtle corner marks */}
+          <span aria-hidden className="absolute top-6 left-6 block h-8 w-px bg-[color:var(--color-espresso)]/10" />
+          <span aria-hidden className="absolute top-6 left-6 block h-px w-8 bg-[color:var(--color-espresso)]/10" />
+          <span aria-hidden className="absolute top-6 right-6 block h-8 w-px bg-[color:var(--color-espresso)]/10" />
+          <span aria-hidden className="absolute top-6 right-6 block h-px w-8 bg-[color:var(--color-espresso)]/10" />
+          <span aria-hidden className="absolute bottom-6 left-6 block h-8 w-px bg-[color:var(--color-espresso)]/10" />
+          <span aria-hidden className="absolute bottom-6 left-6 block h-px w-8 bg-[color:var(--color-espresso)]/10" />
+          <span aria-hidden className="absolute bottom-6 right-6 block h-8 w-px bg-[color:var(--color-espresso)]/10" />
+          <span aria-hidden className="absolute bottom-6 right-6 block h-px w-8 bg-[color:var(--color-espresso)]/10" />
 
+          <div className="mx-auto max-w-[560px]">
+            {/* Eyebrow */}
+            <div className="nl-item mb-8 flex items-center justify-center gap-3">
+              <div className="h-px w-8 bg-[color:var(--color-espresso)]/20" />
+              <span className="font-sans text-[10px] font-medium uppercase tracking-[0.38em] text-[color:var(--color-espresso)]/45">
+                Newsletter
+              </span>
+              <div className="h-px w-8 bg-[color:var(--color-espresso)]/20" />
+            </div>
 
-          {/* Eyebrow with flanking lines */}
-          <div className="nl-reveal relative mb-6 flex items-center justify-center gap-4">
-            <div
-              className="h-px w-10"
-              style={{
-                background:
-                  "linear-gradient(to right, transparent, var(--color-brass))",
-              }}
-            />
-            <span
-              className="font-sans text-[11px] font-semibold uppercase tracking-[0.32em]"
-              style={{ color: "var(--color-brass)" }}
-            >
-              Newsletter
-            </span>
-            <div
-              className="h-px w-10"
-              style={{
-                background:
-                  "linear-gradient(to left, transparent, var(--color-brass))",
-              }}
-            />
-          </div>
+            {/* Heading */}
+            <h2 className="nl-item font-display text-[clamp(2.4rem,5.5vw,4rem)] leading-[1.0] tracking-[-0.025em] text-[color:var(--color-espresso)] mb-5">
+              Letters from<br />
+              the roastery
+            </h2>
 
-          {/* Headline — split, mixed serif + italic accent */}
-          <h2
-            className="relative font-display leading-[1.05] tracking-[-0.015em]"
-            style={{
-              color: "#F3ECDF",
-              fontSize: "clamp(2rem, 4.5vw, 3.5rem)",
-            }}
-          >
-            <span className="nl-word inline-block">Letters</span>{" "}
-            <span className="nl-word inline-block">from</span>{" "}
-            <span className="nl-word inline-block">the</span>{" "}
-            <span
-              className="nl-word inline-block italic"
-              style={{ color: "var(--color-brass)" }}
-            >
-              Roastery
-            </span>
-          </h2>
+            {/* Subline */}
+            <p className="nl-item font-sans text-[14px] leading-[1.8] text-[color:var(--color-espresso)] mb-12 max-w-[38ch] mx-auto">
+              Seasonal menus, brewing guides, and the occasional quiet story —
+              sent rarely, written carefully.
+            </p>
 
-          {/* Subline */}
-          <p
-            className="nl-reveal relative mt-5 font-sans text-[15px] md:text-base max-w-[46ch] mx-auto leading-[1.7]"
-            style={{ color: "rgba(243,236,223,0.65)" }}
-          >
-            New arrivals, brewing notes, and quiet invites — delivered slowly,
-            never spammy.
-          </p>
-
-          {/* Form */}
-          {!submitted ? (
-            <form
-              onSubmit={handleSubmit}
-              className="nl-reveal relative mt-10 mx-auto max-w-md"
-            >
-              <div
-                className="relative flex items-center rounded-full transition-all duration-500"
-                style={{
-                  background: "rgba(20,15,10,0.5)",
-                  border: focused
-                    ? "1px solid var(--color-brass)"
-                    : "1px solid rgba(243,236,223,0.18)",
-                  boxShadow: focused
-                    ? "0 0 0 4px rgba(184,147,90,0.12), 0 8px 30px rgba(0,0,0,0.3)"
-                    : "0 4px 20px rgba(0,0,0,0.2)",
-                }}
-              >
-                <span
-                  className="pl-5 pr-1 transition-opacity duration-300"
-                  style={{ color: "var(--color-brass)", opacity: focused || email ? 1 : 0.5 }}
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <rect x="3" y="5" width="18" height="14" rx="2" />
-                    <path d="m3 7 9 6 9-6" />
-                  </svg>
-                </span>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onFocus={() => setFocused(true)}
-                  onBlur={() => setFocused(false)}
-                  placeholder="your@email.com"
-                  className="flex-1 bg-transparent px-3 py-3.5 font-sans text-sm outline-none placeholder:opacity-40"
-                  style={{ color: "#F3ECDF" }}
-                />
-                <button
-                  type="submit"
-                  className="group relative m-1 px-6 py-2.5 rounded-full font-sans text-xs uppercase tracking-[0.22em] font-semibold transition-all duration-300 hover:scale-[1.03]"
+            {/* Form / Success */}
+            {!submitted ? (
+              <form onSubmit={handleSubmit} className="nl-item mx-auto max-w-[400px]">
+                <div
+                  className="flex items-center transition-all duration-400 rounded-full"
                   style={{
-                    background:
-                      "linear-gradient(135deg, var(--color-brass), var(--color-brass-deep))",
-                    color: "#1a120b",
-                    boxShadow: "0 4px 20px rgba(184,147,90,0.35)",
+                    border: focused
+                      ? "1px solid var(--color-espresso)"
+                      : "1px solid rgba(27,16,10,0.18)",
+                    boxShadow: focused
+                      ? "0 0 0 3px rgba(27,16,10,0.06)"
+                      : "none",
                   }}
                 >
-                  <span className="relative inline-flex items-center gap-2">
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={() => setFocused(true)}
+                    onBlur={() => setFocused(false)}
+                    placeholder="your@email.com"
+                    className="flex-1 bg-transparent pl-5 pr-2 py-3.5 font-sans text-[13px] text-[color:var(--color-espresso)] placeholder:text-[color:var(--color-espresso)]/30 outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="m-1 rounded-full bg-[color:var(--color-espresso)] px-6 py-2.5 font-sans text-[11px] uppercase tracking-[0.22em] font-medium text-[color:var(--color-ivory)] transition-opacity duration-300 hover:opacity-70"
+                  >
                     Subscribe
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      className="transition-transform duration-300 group-hover:translate-x-0.5"
-                    >
-                      <path d="M5 12h14M13 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </button>
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="nl-success opacity-0">
+                <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--color-espresso)]/20">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[color:var(--color-espresso)]">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                </div>
+                <p className="font-display text-[1.6rem] text-[color:var(--color-espresso)] mb-1">
+                  You&apos;re on the list.
+                </p>
+                <p className="font-sans text-[12px] text-[color:var(--color-espresso)]/40">
+                  Something worth reading will find you soon.
+                </p>
               </div>
-            </form>
-          ) : (
-            <div className="nl-success relative mt-10 flex flex-col items-center gap-2">
-              <div
-                className="flex h-10 w-10 items-center justify-center rounded-full"
-                style={{
-                  background: "rgba(184,147,90,0.15)",
-                  border: "1px solid rgba(184,147,90,0.5)",
-                }}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: "var(--color-brass)" }}>
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-              </div>
-              <p
-                className="font-display italic text-lg"
-                style={{ color: "var(--color-brass)" }}
-              >
-                You&apos;re on the list.
-              </p>
-              <p
-                className="font-sans text-xs"
-                style={{ color: "rgba(243,236,223,0.5)" }}
-              >
-                Something beautiful will arrive in your inbox soon.
-              </p>
-            </div>
-          )}
+            )}
 
-          {/* Footer trust line */}
-          <p
-            className="nl-reveal relative mt-8 font-sans text-[10px] uppercase tracking-[0.32em]"
-            style={{ color: "rgba(243,236,223,0.35)" }}
-          >
-            No spam · Unsubscribe anytime · Brewed with care
-          </p>
+            {/* Footnote */}
+            {!submitted && (
+              <p className="nl-item mt-8 font-sans text-[9px] uppercase tracking-[0.35em] text-[color:var(--color-espresso)]">
+                No spam · Unsubscribe anytime
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </section>
