@@ -97,7 +97,7 @@ function LogoColumn() {
         alt="White Teak Coffee Roasters"
         width={500}
         height={500}
-        className="h-auto w-[120px] origin-left scale-x-[1.75] lg:w-[135px]"
+        className="h-auto w-[160px] origin-left scale-x-[1.75] sm:w-[120px] lg:w-[135px]"
       />
     </div>
   );

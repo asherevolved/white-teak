@@ -196,9 +196,6 @@ export default function StorySection() {
 
               return (
                 <div key={block.title} className="timeline-item relative pl-16 md:pl-0">
-                  {block.title === "Events" && (
-                    <div id="mango-start" aria-hidden className="absolute left-0 top-1/2 h-0 w-0" />
-                  )}
                   {/* badge image on the line */}
                   <div
                     className={`

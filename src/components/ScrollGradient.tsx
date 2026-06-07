@@ -54,10 +54,8 @@ const SECTIONS = [
   { sel: "#nature",                      ...makeState("#bdb08a", "#b8aa84", "#b0a37e") },
   // Story — roasted brown (solid feel)
   { sel: "#story",                       ...makeState("#86593b", "#815638", "#7a5135") },
-  // Events chapter (inside Story) → mango yellow begins here
-  { sel: "#mango-start",                 ...makeState("#FFD93B", "#FFCB2D", "#F7B924") },
-  // Farm / Arrivals — mango yellow (Summer Affair) continues
-  { sel: "main > section:nth-child(5)",  ...makeState("#FFD93B", "#FFCB2D", "#F7B924") },
+  // Farm — roasted brown (solid feel)
+  { sel: "main > section:nth-child(5)",  ...makeState("#55372a", "#4d3324", "#3a2218") },
   // Feature Cards — dark brown (solid feel)
   { sel: "main > section:nth-child(6)",  ...makeState("#2e1d16", "#2b1a14", "#281812") },
   // Reviews — near-black coffee (solid feel)

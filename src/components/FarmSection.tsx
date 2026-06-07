@@ -1,114 +1,80 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { FARM_IMAGES } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const DISHES = [
-  "Fresh Mango Cake",
-  "Fresh Mango Cheesecake",
-  "Mango Matcha Latte",
-  "Mango White Chocolate French Toast",
-  "Mango White Chocolate Pancake",
-  "Mango White Chocolate Waffle",
-  "Mango Yogurt Granola Bowl",
-  "Mango Sticky Oats",
-  "Mango Coconut Oats Bowl",
-  "Raw Mango & Papaya Salad",
-  "Mango Brownie Crumble",
-];
-
 export default function FarmSection() {
   const root = useRef<HTMLElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useGSAP(
     () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-      const tl = gsap.timeline({
-        defaults: { ease: "power3.out" },
-        scrollTrigger: { trigger: root.current, start: "top 75%", once: true },
+      gsap.from(".farm-head > *", {
+        y: 30,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".farm-head", start: "top 85%" },
       });
-
-      tl.from(".mango-branch", { y: -60, opacity: 0, duration: 1.1, ease: "power2.out" })
-        .from(".sa-title", { x: -50, opacity: 0, duration: 1 }, "-=0.7")
-        .from(".sa-eyebrow", { y: 16, opacity: 0, duration: 0.6 }, "-=0.6")
-        .from(".dish-item", { x: -24, opacity: 0, stagger: 0.07, duration: 0.5 }, "-=0.4")
-        .from(".dishes-photo", { scale: 0.9, opacity: 0, duration: 1.1, ease: "expo.out" }, "-=0.9");
-
-      // Gentle continuous sway on the mango branch.
-      gsap.to(".mango-branch", {
-        rotate: 2,
-        transformOrigin: "top right",
-        duration: 4,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
+      gsap.from(".farm-gallery", {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        ease: "expo.out",
+        scrollTrigger: { trigger: ".farm-gallery", start: "top 80%" },
       });
     },
     { scope: root }
   );
 
   return (
-    <section
-      id="arrivals"
-      ref={root}
-      className="relative overflow-hidden py-16 lg:py-20"
-      style={{ background: "transparent" }}
-    >
-      {/* Mango branch — top-right corner art */}
-      <Image
-        src="/mango-branch.png"
-        alt=""
-        aria-hidden
-        width={800}
-        height={500}
-        className="mango-branch pointer-events-none absolute right-0 top-0 w-[65%] max-w-[900px] select-none lg:w-[58%]"
-      />
+    <section ref={root} className="py-20" style={{ background: "transparent" }}>
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="farm-head text-center mb-12">
+          <h2 className="font-display text-3xl md:text-4xl" style={{ color: "#F3ECDF" }}>
+            From Heart to Hands, Farm to Cup
+          </h2>
+          <p className="font-sans text-sm mt-3 max-w-xl mx-auto" style={{ color: "rgba(243,236,223,0.65)" }}>
+            Our Coffee Farms Nestled in Nature&apos;s Embrace
+          </p>
+        </div>
 
-      <div className="relative mx-auto max-w-[1320px] px-6 lg:px-10">
-        {/* Title art */}
-        <p className="sa-eyebrow mb-2 font-sans text-[12px] font-semibold uppercase tracking-[0.32em] text-[#7A3B1E]">
-          New Arrivals
-        </p>
-        <Image
-          src="/summer-affair-title.png"
-          alt="The Summer Affair"
-          width={520}
-          height={300}
-          className="sa-title -mb-4 w-[340px] sm:w-[560px] lg:-mb-10 lg:w-[820px]"
-        />
-
-        <div className="relative z-10 grid grid-cols-1 items-start gap-6 lg:grid-cols-[300px_1fr] lg:gap-12">
-          {/* Dish list */}
-          <ul className="space-y-2.5 lg:-mt-52">
-            {DISHES.map((dish) => (
-              <li
-                key={dish}
-                className="dish-item font-display text-[1.35rem] font-semibold leading-snug text-[#5A2E12]"
-              >
-                {dish}
-              </li>
+        {/* Image carousel */}
+        <div className="farm-gallery relative">
+          <div className="aspect-[16/9] md:aspect-[2.5/1] rounded-2xl overflow-hidden relative">
+            {FARM_IMAGES.map((src, i) => (
+              <Image
+                key={i}
+                src={src}
+                alt={`Coffee farm ${i + 1}`}
+                fill
+                className={`object-cover transition-opacity duration-700 ${i === activeIndex ? "opacity-100" : "opacity-0"
+                  }`}
+              />
             ))}
-            <li className="dish-item pl-6 font-display text-[1.2rem] text-[#7A3B1E]">
-              — with ice cream
-            </li>
-          </ul>
+          </div>
 
-          {/* Polaroid dishes photo */}
-          <div className="dishes-photo lg:-mt-52">
-            <Image
-              src="/mango-dishes.png"
-              alt="Mango dish collection — cakes, cheesecake, pancakes, waffles, bowls and salad"
-              width={1200}
-              height={680}
-              className="h-auto w-full drop-shadow-[0_24px_48px_rgba(120,70,10,0.28)]"
-              priority={false}
-            />
+          {/* Carousel dots */}
+          <div className="flex justify-center gap-3 mt-6">
+            {FARM_IMAGES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                className={`w-3 h-3 rounded-full transition-all ${i === activeIndex
+                    ? "scale-110"
+                    : "opacity-40 hover:opacity-70"
+                  }`}
+                style={{ background: i === activeIndex ? "#F3ECDF" : "rgba(243,236,223,0.35)" }}
+                aria-label={`View farm image ${i + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>

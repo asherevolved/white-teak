@@ -5,19 +5,18 @@ import Image from "next/image";
 import { NAV_LINKS, MENU_URL } from "@/lib/constants";
 
 const EXTENDED_LINKS = [
-  { label: "Home", href: "#hero" },
-  { label: "Story", href: "#story" },
-  { label: "Arrivals", href: "#arrivals" },
+  { label: "Home", href: "/#hero" },
+  { label: "Story", href: "/#story" },
+  { label: "Arrivals", href: "/arrivals" },
   { label: "Menu", href: MENU_URL, external: true },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Locations", href: "#footer" },
+  { label: "Testimonials", href: "/#testimonials" },
+  { label: "Locations", href: "/#footer" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [arrivalsActive, setArrivalsActive] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,18 +29,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Highlight the "Arrivals" link only while its section is in view.
-  useEffect(() => {
-    const section = document.getElementById("arrivals");
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setArrivalsActive(entry.isIntersecting),
-      { rootMargin: "-45% 0px -45% 0px" }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
   }, []);
 
   // Reference NAV_LINKS for compat
@@ -84,7 +71,6 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-10">
               {EXTENDED_LINKS.map((link) => {
                 const isArrivals = link.label === "Arrivals";
-                const showArrivalsHighlight = isArrivals && arrivalsActive;
                 return (
                   <a
                     key={link.href}
@@ -93,9 +79,7 @@ export default function Navbar() {
                     rel={link.external ? "noopener noreferrer" : undefined}
                     className={`group relative text-[13px] font-sans transition-colors tracking-[0.15em] uppercase ${
                       isArrivals
-                        ? "font-bold text-[#FFCB2D] drop-shadow-[0_0_10px_rgba(255,203,45,0.55)] hover:text-[#FFE06B]"
-                        : showArrivalsHighlight
-                        ? "font-medium text-[#D4B487] hover:text-[#F3ECDF]"
+                        ? "font-bold text-white drop-shadow-[0_0_10px_rgba(255,203,45,0.8)] hover:text-[#FFCB2D]"
                         : "font-medium text-white/75 hover:text-white"
                     }`}
                   >
@@ -120,17 +104,8 @@ export default function Navbar() {
                         <span className="arrivals-click-ring" />
                       </span>
                     )}
-                    {showArrivalsHighlight ? (
-                      <span className="arrivals-label">
-                        {link.label}
-                        <span className="arrivals-glow" />
-                      </span>
-                    ) : (
-                      <>
-                        {link.label}
-                        <span className="absolute -bottom-1 left-0 w-full h-px bg-white origin-right scale-x-0 group-hover:origin-left group-hover:scale-x-100 transition-transform duration-500" />
-                      </>
-                    )}
+                    {link.label}
+                    <span className="absolute -bottom-1 left-0 w-full h-px bg-white origin-right scale-x-0 group-hover:origin-left group-hover:scale-x-100 transition-transform duration-500" />
                   </a>
                 );
               })}
