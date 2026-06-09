@@ -91,13 +91,13 @@ function SectionHeading({ children }: { children: ReactNode }) {
 
 function LogoColumn() {
   return (
-    <div className="ft-col flex justify-center sm:justify-start">
+    <div className="ft-col flex items-center justify-center sm:justify-start lg:items-start">
       <Image
         src="/white-teak-logo.png"
         alt="White Teak Coffee Roasters"
         width={500}
         height={500}
-        className="h-auto w-[160px] origin-left scale-x-[1.75] sm:w-[120px] lg:w-[135px]"
+        className="h-auto w-[170px] sm:w-[150px] lg:w-[200px]"
       />
     </div>
   );

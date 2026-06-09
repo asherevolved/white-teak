@@ -10,7 +10,7 @@ const EXTENDED_LINKS = [
   { label: "Arrivals", href: "/arrivals" },
   { label: "Menu", href: MENU_URL, external: true },
   { label: "Testimonials", href: "/#testimonials" },
-  { label: "Locations", href: "/#footer" },
+  { label: "Locations", href: "/#locations" },
 ];
 
 export default function Navbar() {
@@ -54,7 +54,7 @@ export default function Navbar() {
         <div className="max-w-[1400px] mx-auto pl-0 pr-2 lg:pl-0 lg:pr-4">
           <div className="flex items-center justify-between h-24">
             {/* Logo + Brand */}
-            <a href="#hero" className="flex items-center gap-2 group">
+            <a href="/#hero" className="flex items-center gap-2 group">
               <Image
                 src="/assets/logo.png"
                 alt="White Teak Logo"

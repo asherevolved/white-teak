@@ -36,7 +36,6 @@ export default function ArrivalsSection() {
 
       tl.from(".mango-branch", { y: -60, opacity: 0, duration: 1.1, ease: "power2.out" })
         .from(".sa-title", { x: -50, opacity: 0, duration: 1 }, "-=0.7")
-        .from(".sa-eyebrow", { y: 16, opacity: 0, duration: 0.6 }, "-=0.6")
         .from(".dish-item", { x: -24, opacity: 0, stagger: 0.07, duration: 0.5 }, "-=0.4")
         .from(".dishes-photo", { scale: 0.9, opacity: 0, duration: 1.1, ease: "expo.out" }, "-=0.9");
 
@@ -68,44 +67,34 @@ export default function ArrivalsSection() {
         className="mango-branch pointer-events-none absolute right-0 top-0 w-[65%] max-w-[900px] select-none lg:w-[58%]"
       />
 
-      <div className="relative mx-auto max-w-[1320px] px-6 lg:px-10">
+      <div className="relative mx-auto max-w-[1400px] px-4 lg:px-8">
         {/* Title art */}
-        <p
-          className="sa-eyebrow mb-2 font-sans text-[13px] font-bold uppercase tracking-[0.32em] text-[#FFE9A8]"
-          style={{
-            WebkitTextStroke: "0.6px #2B1206",
-            textShadow:
-              "0 1px 0 #2B1206, 0 2px 6px rgba(43,18,6,0.45)",
-          }}
-        >
-          New Arrivals
-        </p>
         <Image
           src="/summer-affair-title.png"
           alt="The Summer Affair"
           width={520}
           height={300}
-          className="sa-title -mb-4 w-[340px] sm:w-[560px] lg:-mb-10 lg:w-[820px]"
+          className="sa-title -mb-8 w-[420px] sm:-mb-10 sm:w-[720px] lg:-mb-20 lg:w-[1100px]"
         />
 
-        <div className="relative z-10 grid grid-cols-1 items-start gap-6 lg:grid-cols-[300px_1fr] lg:gap-12">
+        <div className="relative z-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-10">
           {/* Dish list */}
-          <ul className="space-y-2.5 lg:-mt-52">
+          <ul className="space-y-2 lg:-mt-64">
             {DISHES.map((dish) => (
               <li
                 key={dish}
-                className="dish-item font-display text-[1.35rem] font-semibold leading-snug text-[#5A2E12]"
+                className="dish-item font-display text-[1.25rem] font-semibold leading-snug text-[#5A2E12] sm:text-[1.5rem] lg:text-[1.7rem]"
               >
                 {dish}
               </li>
             ))}
-            <li className="dish-item pl-6 font-display text-[1.2rem] text-[#7A3B1E]">
+            <li className="dish-item pl-6 font-display text-[1.1rem] text-[#7A3B1E] sm:text-[1.35rem] lg:text-[1.5rem]">
               — with ice cream
             </li>
           </ul>
 
           {/* Polaroid dishes photo */}
-          <div className="dishes-photo lg:-mt-52">
+          <div className="dishes-photo mx-auto w-full max-w-[720px] lg:mx-0 lg:-mt-32 lg:max-w-none lg:justify-self-end lg:scale-[1.12] lg:origin-right">
             <Image
               src="/mango-dishes.png"
               alt="Mango dish collection — cakes, cheesecake, pancakes, waffles, bowls and salad"

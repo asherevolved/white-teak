@@ -6,6 +6,7 @@ import StorySection from "@/components/StorySection";
 import FarmSection from "@/components/FarmSection";
 import FeatureCards from "@/components/FeatureCards";
 import GoogleReviews from "@/components/GoogleReviews";
+import LocationsSection from "@/components/LocationsSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import Footer from "@/components/Footer";
 import ScrollGradient from "@/components/ScrollGradient";
@@ -25,6 +26,7 @@ export default function Home() {
         <FarmSection />
         <FeatureCards />
         <GoogleReviews />
+        <LocationsSection />
         <NewsletterSection />
         <Footer />
       </main>
