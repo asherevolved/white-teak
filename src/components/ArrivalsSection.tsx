@@ -64,40 +64,40 @@ export default function ArrivalsSection() {
         aria-hidden
         width={800}
         height={500}
-        className="mango-branch pointer-events-none absolute right-0 top-0 w-[55%] max-w-[700px] select-none"
+        className="mango-branch pointer-events-none absolute right-0 top-0 w-[68%] max-w-[900px] select-none"
       />
 
-      <div className="relative mx-auto max-w-[1200px] px-6 lg:px-12">
+      <div className="relative w-full px-6 lg:px-16">
 
         {/* Summer Affair title */}
         <Image
-          src="/summer-affair-title.png"
+          src="/summer-affair-title-cropped.png"
           alt="The Summer Affair"
-          width={520}
-          height={300}
-          className="sa-title relative z-10 -ml-6 w-[340px] sm:w-[520px] lg:-ml-12 lg:w-[820px] xl:w-[920px]"
+          width={1139}
+          height={685}
+          className="sa-title relative z-10 w-[140px] sm:w-[200px] lg:w-[270px] xl:w-[300px]"
         />
 
         {/* Two-column layout: dish list left, photo right */}
-        <div className="mt-6 grid grid-cols-1 gap-8 lg:mt-8 lg:grid-cols-2 lg:gap-12 lg:items-start">
+        <div className="mt-8 grid grid-cols-1 gap-8 lg:mt-12 lg:grid-cols-[minmax(300px,400px)_1fr] lg:gap-12 lg:items-center">
 
           {/* Dish list */}
-          <ul className="-ml-6 space-y-2 lg:-ml-12 lg:-mt-40">
+          <ul className="space-y-2">
             {DISHES.map((dish) => (
               <li
                 key={dish}
-                className="dish-item font-display text-[1.2rem] font-semibold leading-snug text-[#5A2E12] sm:text-[1.4rem] lg:text-[1.55rem]"
+                className="dish-item font-display text-[1.2rem] font-semibold leading-snug text-[#5A2E12] sm:text-[1.4rem] lg:text-[1.7rem]"
               >
                 {dish}
               </li>
             ))}
-            <li className="dish-item pl-5 font-display text-[1.05rem] text-[#7A3B1E] sm:text-[1.2rem] lg:text-[1.35rem]">
+            <li className="dish-item pl-5 font-display text-[1.05rem] text-[#7A3B1E] sm:text-[1.2rem] lg:text-[1.45rem]">
               — with ice cream
             </li>
           </ul>
 
           {/* Photo */}
-          <div className="dishes-photo lg:w-[125%] lg:-ml-[25%] lg:justify-self-end">
+          <div className="dishes-photo w-full">
             <Image
               src="/mango-dishes.png"
               alt="Mango dish collection"
