@@ -54,56 +54,60 @@ export default function ArrivalsSection() {
   return (
     <section
       ref={root}
-      className="relative overflow-hidden pt-4 pb-24 lg:pb-32"
+      className="relative overflow-hidden pt-6 pb-20 lg:pt-8 lg:pb-28"
       style={{ background: "transparent" }}
     >
-      {/* Mango branch — top-right corner art */}
+      {/* Mango branch — top-right corner */}
       <Image
         src="/mango-branch.png"
         alt=""
         aria-hidden
         width={800}
         height={500}
-        className="mango-branch pointer-events-none absolute right-0 top-0 w-[65%] max-w-[900px] select-none lg:w-[58%]"
+        className="mango-branch pointer-events-none absolute right-0 top-0 w-[55%] max-w-[700px] select-none"
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-4 lg:px-8">
-        {/* Title art */}
+      <div className="relative mx-auto max-w-[1200px] px-6 lg:px-12">
+
+        {/* Summer Affair title */}
         <Image
           src="/summer-affair-title.png"
           alt="The Summer Affair"
           width={520}
           height={300}
-          className="sa-title -mb-8 w-[420px] sm:-mb-10 sm:w-[720px] lg:-mb-20 lg:w-[1100px]"
+          className="sa-title relative z-10 -ml-6 w-[340px] sm:w-[520px] lg:-ml-12 lg:w-[820px] xl:w-[920px]"
         />
 
-        <div className="relative z-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-10">
+        {/* Two-column layout: dish list left, photo right */}
+        <div className="mt-6 grid grid-cols-1 gap-8 lg:mt-8 lg:grid-cols-2 lg:gap-12 lg:items-start">
+
           {/* Dish list */}
-          <ul className="space-y-2 lg:-mt-64">
+          <ul className="-ml-6 space-y-2 lg:-ml-12 lg:-mt-40">
             {DISHES.map((dish) => (
               <li
                 key={dish}
-                className="dish-item font-display text-[1.25rem] font-semibold leading-snug text-[#5A2E12] sm:text-[1.5rem] lg:text-[1.7rem]"
+                className="dish-item font-display text-[1.2rem] font-semibold leading-snug text-[#5A2E12] sm:text-[1.4rem] lg:text-[1.55rem]"
               >
                 {dish}
               </li>
             ))}
-            <li className="dish-item pl-6 font-display text-[1.1rem] text-[#7A3B1E] sm:text-[1.35rem] lg:text-[1.5rem]">
+            <li className="dish-item pl-5 font-display text-[1.05rem] text-[#7A3B1E] sm:text-[1.2rem] lg:text-[1.35rem]">
               — with ice cream
             </li>
           </ul>
 
-          {/* Polaroid dishes photo */}
-          <div className="dishes-photo mx-auto w-full max-w-[720px] lg:mx-0 lg:-mt-32 lg:max-w-none lg:justify-self-end lg:scale-[1.12] lg:origin-right">
+          {/* Photo */}
+          <div className="dishes-photo lg:w-[125%] lg:-ml-[25%] lg:justify-self-end">
             <Image
               src="/mango-dishes.png"
-              alt="Mango dish collection — cakes, cheesecake, pancakes, waffles, bowls and salad"
+              alt="Mango dish collection"
               width={1200}
               height={680}
               className="h-auto w-full drop-shadow-[0_24px_48px_rgba(120,70,10,0.28)]"
-              priority={false}
+              priority
             />
           </div>
+
         </div>
       </div>
     </section>

@@ -152,7 +152,6 @@ export default function ScrollGradient() {
         inset: 0,
         zIndex: -1,
         pointerEvents: "none",
-        willChange: "background",
       }}
     />
   );

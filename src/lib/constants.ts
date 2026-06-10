@@ -32,6 +32,11 @@ export const LOCATIONS = [
     hours: "7 AM – 12 AM",
     mapUrl: "https://maps.app.goo.gl/yZ2Ra8chnnLyr1QL8",
   },
+  {
+    name: "Bangalore",
+    hours: "Brewing Soon",
+    mapUrl: "#",
+  },
 ];
 
 export const SOCIAL_LINKS = {

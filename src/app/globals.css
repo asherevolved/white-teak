@@ -416,14 +416,23 @@ body::after {
 
 .animate-marquee {
   animation: marquee 40s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .animate-marquee-slow {
   animation: marquee 70s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .animate-marquee-reverse {
   animation: marquee 50s linear infinite reverse;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Float idle */

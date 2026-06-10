@@ -116,8 +116,9 @@ function ReviewCard({ review }: { review: (typeof GOOGLE_REVIEWS)[0] }) {
 
 export default function GoogleReviews() {
   const root = useRef<HTMLElement>(null);
+  const track = useRef<HTMLDivElement>(null);
 
-  const stream = [...GOOGLE_REVIEWS, ...GOOGLE_REVIEWS, ...GOOGLE_REVIEWS];
+  const stream = [...GOOGLE_REVIEWS, ...GOOGLE_REVIEWS];
 
   useGSAP(
     () => {
@@ -129,6 +130,18 @@ export default function GoogleReviews() {
         ease: "expo.out",
         scrollTrigger: { trigger: ".testimonials-header", start: "top 85%" },
       });
+
+      // Pause marquee when off-screen — kills compositing cost near Locations.
+      const el = track.current;
+      if (!el) return;
+      const io = new IntersectionObserver(
+        ([e]) => {
+          el.style.animationPlayState = e.isIntersecting ? "running" : "paused";
+        },
+        { rootMargin: "100px" }
+      );
+      io.observe(el);
+      return () => io.disconnect();
     },
     { scope: root }
   );
@@ -161,7 +174,7 @@ export default function GoogleReviews() {
 
       {/* Marquee with card-style reviews */}
       <div className="overflow-hidden py-2">
-        <div className="flex animate-marquee-slow">
+        <div ref={track} className="flex animate-marquee-slow">
           {stream.map((review, i) => (
             <ReviewCard key={i} review={review} />
           ))}
